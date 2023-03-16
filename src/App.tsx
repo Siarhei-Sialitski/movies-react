@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-        <Counter initialValue={10}/>
+        <Counter initialValue={10} />
         <Search 
           initialValue=''
           onSearch={(s) => console.log(s)} />

@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { SearchProps } from './types';
 
-export default function Search({ initialValue, onSearch } :SearchProps) {
+const Search: React.FC<SearchProps> = ({ initialValue, onSearch }) => {
     const [searchValue, setSearchValue] = useState(initialValue);
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            onSearch(searchValue)
+        }
+    }
 
     return (
         <div>
@@ -10,6 +16,7 @@ export default function Search({ initialValue, onSearch } :SearchProps) {
                 className='searchInput'
                 value={searchValue}
                 onChange={e => {setSearchValue(e.target.value)}}
+                onKeyDown={handleKeyDown}
                 placeholder='What do you want to watch?'/>
             <button
                 className='searchButton'
@@ -17,3 +24,5 @@ export default function Search({ initialValue, onSearch } :SearchProps) {
         </div>
     )
 }
+
+export default Search;

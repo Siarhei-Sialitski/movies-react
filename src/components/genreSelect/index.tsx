@@ -1,12 +1,20 @@
+import classNames from 'classnames';
 import { GenreSelectProps } from './types';
 
-export default function GenreSelect({ genreNames, selectedGenre, onSelect } :GenreSelectProps) {
-    const genreItems = genreNames.map(genre =>
-        <button
-            key={genre}
-            className={`genreButton ${genre === selectedGenre ? 'genreButtonHighlited' : ''}`}
-            onClick={() => onSelect(genre)}>{genre}
-        </button>)
+const GenreSelect : React.FC<GenreSelectProps> = ({ genreNames, selectedGenre, onSelect }) => {
+
+    const genreItems = genreNames.map(genre => {
+            const btnClass = classNames({
+                genreButton: true,
+                genreButtonHighlited: genre === selectedGenre
+            });
+
+            return <button
+                key={genre}
+                className={btnClass}
+                onClick={() => onSelect(genre)}>{genre}
+            </button>
+        })
 
     return (
         <div className='genreDiv'>
@@ -14,3 +22,5 @@ export default function GenreSelect({ genreNames, selectedGenre, onSelect } :Gen
         </div>
     )
 }
+
+export default GenreSelect;
