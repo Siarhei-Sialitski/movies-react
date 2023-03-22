@@ -6,9 +6,9 @@ export default class Counter extends React.Component<{ initialValue: number}, { 
       return  React.createElement(
           'div',
           { className: 'flex' },
-          React.createElement('button', { onClick: () => this.modify(-1) }, '-'),
+          React.createElement('button', { onClick: () => this.modify(-1), 'data-testid': 'decrement' }, '-'),
           React.createElement('p', { }, this.state.counter),
-          React.createElement('button', { onClick: () => this.modify(1) }, '+'))
+          React.createElement('button', { onClick: () => this.modify(1), 'data-testid': 'increment' }, '+'))
       }
 
       modify = (amount: number) => {

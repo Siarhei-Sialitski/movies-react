@@ -17,10 +17,15 @@ const Search: React.FC<SearchProps> = ({ initialValue, onSearch }) => {
                 value={searchValue}
                 onChange={e => {setSearchValue(e.target.value)}}
                 onKeyDown={handleKeyDown}
-                placeholder='What do you want to watch?'/>
+                placeholder='What do you want to watch?'
+                data-testid='search-input'/>
             <button
                 className='searchButton'
-                onClick={() => {onSearch(searchValue)}}>search</button>
+                onClick={() => {onSearch(searchValue)}}
+                data-testid='button'
+                >
+                search
+            </button>
         </div>
     )
 }
