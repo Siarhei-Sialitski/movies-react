@@ -1,11 +1,11 @@
-import type { Config } from 'jest';
+import type { Config } from "jest";
 
 const config: Config = {
   clearMocks: true,
-  testEnvironment: 'jsdom',
+  testEnvironment: "jsdom",
   injectGlobals: true,
-  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
-  preset: 'ts-jest',
+  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
+  preset: "ts-jest",
 };
 
 export default config;
