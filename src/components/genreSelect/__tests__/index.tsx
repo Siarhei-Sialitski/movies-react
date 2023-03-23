@@ -1,12 +1,10 @@
-import {cleanup, render, screen} from '@testing-library/react';
+import { render, screen} from '@testing-library/react';
 import GenreSelect from '../index';
 import userEvent from '@testing-library/user-event'
 
-afterEach(cleanup);
-
 const genres = ['All', 'Documentary', 'Comedy', 'Horror', 'Crime'];
 const selectedGenre = genres[0];
-const handleSelectMock = jest.fn(() => {})
+const handleSelectMock = jest.fn()
 const setup = () => {
   const user = userEvent.setup();
   const utils = render(<GenreSelect genreNames={genres} selectedGenre={selectedGenre} onSelect={handleSelectMock}/>)
@@ -37,6 +35,7 @@ describe('Genre Select', () => {
 
       await user.click(screen.getByText(newSelectedGenre));
 
+      expect(handleSelectMock).toBeCalledTimes(1);
       expect(handleSelectMock).toBeCalledWith(newSelectedGenre);
     });
 })

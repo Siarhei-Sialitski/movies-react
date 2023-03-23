@@ -1,8 +1,6 @@
-import {cleanup, fireEvent, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import Counter from '../index';
-
-afterEach(cleanup);
 
 const initialValue = 10;
 const setup = () => {

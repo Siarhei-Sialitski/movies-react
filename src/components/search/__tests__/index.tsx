@@ -1,11 +1,9 @@
-import {cleanup, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import Search from '../index';
 import userEvent from '@testing-library/user-event'
 
-afterEach(cleanup);
-
 const initialValue = 'Movie';
-const handleSearchMock = jest.fn(() => {})
+const handleSearchMock = jest.fn()
 const setup = () => {
   const utils = render(<Search initialValue={initialValue} onSearch={handleSearchMock}/>)
   const user = userEvent.setup();
@@ -34,6 +32,7 @@ describe('Search', () => {
       await user.type(input, newInputValue);
       await user.click(button);
 
+      expect(handleSearchMock).toBeCalledTimes(1);
       expect(handleSearchMock).toBeCalledWith(newInputValue);
     });
 
@@ -45,6 +44,7 @@ describe('Search', () => {
       await user.type(input, newInputValue);
       await user.keyboard("Enter");
 
+      expect(handleSearchMock).toBeCalledTimes(1);
       expect(handleSearchMock).toBeCalledWith(newInputValue);
     });
 })
