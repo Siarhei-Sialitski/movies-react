@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -29,27 +29,27 @@ code {
   opacity: 0.8;
   border-radius: 4px;
   padding: 0px 19px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: #FFFFFF;
-  border: none
+  color: #ffffff;
+  border: none;
 }
 
-.searchInput::placeholder{
+.searchInput::placeholder {
   position: absolute;
   height: 24px;
   left: 2.66%;
   right: 56.94%;
-  top: calc(50% - 24px/2 + 0.5px);
-  font-family: 'Montserrat';
+  top: calc(50% - 24px / 2 + 0.5px);
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
-  color: #FFFFFF;
+  color: #ffffff;
   mix-blend-mode: normal;
   opacity: 0.3;
 }
@@ -60,10 +60,10 @@ code {
   height: 57px;
   left: 905px;
   top: 242px;
-  background: #F65261;
+  background: #f65261;
   border-radius: 4px;
-  color: #FFFFFF;
-  font-family: 'Montserrat';
+  color: #ffffff;
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
@@ -72,25 +72,25 @@ code {
   text-transform: uppercase;
   mix-blend-mode: normal;
   opacity: 0.8;
-  border: none
+  border: none;
 }
 
 .genreButton {
   height: 57px;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   border-bottom: solid transparent;
   background-color: rgba(50, 50, 50, 0.8);
 }
 
 .genreButtonHighlited {
-  border-bottom: solid #F65261;
+  border-bottom: solid #f65261;
 }
 
 .genreDiv {
