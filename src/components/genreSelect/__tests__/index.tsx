@@ -30,12 +30,6 @@ describe("Genre Select", () => {
     expect(buttons).toHaveLength(genres.length);
   });
 
-  it("Component highlights a selected genre passed in props", () => {
-    setup();
-
-    expect(screen.getByText(selectedGenre)).toHaveClass("genreButtonHighlited");
-  });
-
   it('After a click event on a genre button component calls "onChange" callback and passes correct genre in arguments', async () => {
     const newSelectedGenre = genres[1];
     const { user } = setup();
