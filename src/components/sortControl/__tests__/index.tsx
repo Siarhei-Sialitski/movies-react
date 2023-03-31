@@ -22,34 +22,36 @@ const setup = () => {
   };
 };
 describe('Sort Control', () => {
-  it('Should render sort by label', () => {
+  it('should render sort by label', () => {
     setup();
 
-    expect(screen.getByText('sort by')).toBeTruthy();
+    expect(screen.getByText('sort by')).toBeInTheDocument();
   });
 
-  it('Should render currentSelection', () => {
+  it('should render currentSelection', () => {
     setup();
 
-    expect(screen.getByText(defaultSelection)).toBeTruthy();
+    expect(screen.getByText(defaultSelection)).toBeInTheDocument();
   });
 
-  it('Should not render other options', () => {
+  it('should not render other options', () => {
     setup();
 
-    expect(screen.queryByText(anotherOption)).toBeFalsy();
+    expect(screen.queryByText(anotherOption)).not.toBeInTheDocument();
   });
 
-  it('Should render both options on dropdown open', async () => {
+  it('should render both options on dropdown open', async () => {
     const { dropdown } = setup();
 
     await userEvent.click(dropdown);
 
-    expect(screen.queryAllByText(defaultSelection)).toBeTruthy();
-    expect(screen.queryAllByText(anotherOption)).toBeTruthy();
+    screen.queryAllByText(defaultSelection).map((el) => {
+      expect(el).toBeInTheDocument();
+    });
+    expect(screen.queryByText(anotherOption)).toBeInTheDocument();
   });
 
-  it('Should call onSelectionChanged on another option click', async () => {
+  it('should call onSelectionChanged on another option click', async () => {
     const { dropdown } = setup();
 
     await userEvent.click(dropdown);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { minutesToHMText } from '../../utils/dateTimeUtils';
 import MovieGenres from '../movieGenres';
 import useStyles from './styles';
 import { IMovieDetailsProps } from './types';
@@ -14,12 +15,6 @@ const MovieDetails: React.FC<IMovieDetailsProps> = ({
 }) => {
   const styles = useStyles();
 
-  const durationToHM = (totalMinutes: number) => {
-    const hours = Math.floor(totalMinutes / 60);
-    const minutes = totalMinutes % 60;
-
-    return `${hours}h ${minutes}m`;
-  };
   return (
     <div>
       <div className={styles.container}>
@@ -34,7 +29,7 @@ const MovieDetails: React.FC<IMovieDetailsProps> = ({
           <MovieGenres genres={genres} />
           <div className={styles.detailsYearAndTime}>
             <span className={styles.releaseYear}>{releaseYear}</span>
-            <span className={styles.duration}>{durationToHM(duration)}</span>
+            <span className={styles.duration}>{minutesToHMText(duration)}</span>
           </div>
           <div className={styles.detailsDescription}>
             <span>{description}</span>

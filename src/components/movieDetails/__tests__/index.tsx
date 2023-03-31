@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import MovieDetails from '..';
 import userEvent from '@testing-library/user-event';
+import { minutesToHMText } from '../../../utils/dateTimeUtils';
 
 const movieName = 'Bohemian Rhapsody';
 const releaseYear = '2003';
@@ -30,35 +31,34 @@ const setup = () => {
 };
 
 describe('Movie details', () => {
-  it('Should render movie name', () => {
+  it('should render movie name', () => {
     setup();
 
-    expect(screen.getByText(movieName)).toBeTruthy();
+    expect(screen.getByText(movieName)).toBeInTheDocument();
   });
 
-  it('Should render release year', () => {
+  it('should render release year', () => {
     setup();
 
-    expect(screen.getByText(releaseYear)).toBeTruthy();
+    expect(screen.getByText(releaseYear)).toBeInTheDocument();
   });
 
-  it('Should render rating', () => {
+  it('should render rating', () => {
     setup();
 
-    expect(screen.getByText(rating)).toBeTruthy();
+    expect(screen.getByText(rating)).toBeInTheDocument();
   });
 
-  it('Should render description', () => {
+  it('should render description', () => {
     setup();
 
-    expect(screen.getByText(description)).toBeTruthy();
+    expect(screen.getByText(description)).toBeInTheDocument();
   });
 
-  it('Should render duration', () => {
+  it('should render duration', () => {
     setup();
-    const hours = Math.floor(duration / 60);
-    const minutes = duration % 60;
+    const hmText = minutesToHMText(duration);
 
-    expect(screen.getByText(`${hours}h ${minutes}m`)).toBeTruthy();
+    expect(screen.getByText(hmText)).toBeInTheDocument();
   });
 });

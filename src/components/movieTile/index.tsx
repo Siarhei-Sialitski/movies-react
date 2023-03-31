@@ -1,10 +1,11 @@
-import { MovieTileProps } from './types';
+import { IMovieTileProps } from './types';
 import React from 'react';
 import MovieGenres from '../movieGenres';
 import useStyles from './styles';
 import TileMenu from '../tileMenu';
 
-const MovieTile: React.FC<MovieTileProps> = ({
+const MovieTile: React.FC<IMovieTileProps> = ({
+  movieId,
   movieName,
   imageUrl,
   genres,
@@ -15,8 +16,13 @@ const MovieTile: React.FC<MovieTileProps> = ({
 }) => {
   const styles = useStyles();
 
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    onClick(movieId);
+  };
+
   return (
-    <div onClick={() => onClick(movieName)} data-testid='container'>
+    <div onClick={handleClick} data-testid='container'>
       <img className={styles.image} src={imageUrl} alt={movieName} />
       <div className={styles.tileContainer}>
         <div className={styles.divTileMovieName}>
@@ -31,8 +37,8 @@ const MovieTile: React.FC<MovieTileProps> = ({
       </div>
       <div className={styles.menu}>
         <TileMenu
-          onEdit={() => onEdit(movieName)}
-          onDelete={() => onDelete(movieName)}
+          onEdit={() => onEdit?.(movieId)}
+          onDelete={() => onDelete?.(movieId)}
         />
       </div>
     </div>

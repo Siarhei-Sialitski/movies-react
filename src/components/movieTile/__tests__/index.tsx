@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import MovieTile from '..';
 import userEvent from '@testing-library/user-event';
 
+const movieId = '1';
 const movieName = 'Bohemian Rhapsody';
 const releaseYear = '2003';
 const genres = ['Drama', 'Biography', 'Music'];
@@ -14,6 +15,7 @@ const setup = () => {
   const user = userEvent.setup();
   const utils = render(
     <MovieTile
+      movieId={movieId}
       movieName={movieName}
       releaseYear={releaseYear}
       imageUrl='someurl'
@@ -30,32 +32,40 @@ const setup = () => {
 };
 
 describe('Movie Tile', () => {
-  it('Should render movie name', () => {
+  it('should render movie name', () => {
     setup();
 
-    expect(screen.getByText(movieName)).toBeTruthy();
+    expect(screen.getByText(movieName)).toBeInTheDocument();
   });
 
-  it('Should render release year', () => {
+  it('should render release year', () => {
     setup();
 
-    expect(screen.getByText(releaseYear)).toBeTruthy();
+    expect(screen.getByText(releaseYear)).toBeInTheDocument();
   });
 
-  it('Should render genres', () => {
+  it('should render genres', () => {
     setup();
 
     genres.map((genre) => {
-      expect(screen.getByText(genre, { exact: false })).toBeTruthy();
+      expect(screen.getByText(genre, { exact: false })).toBeInTheDocument();
     });
   });
 
-  it('Should call onClick after user click', async () => {
+  it('should call onClick after user click', async () => {
     setup();
 
     await userEvent.click(screen.getByTestId('container'));
 
     expect(handleClick).toBeCalledTimes(1);
-    expect(handleClick).toBeCalledWith(movieName);
+    expect(handleClick).toBeCalledWith(movieId);
+  });
+
+  it('should not call onClick after user click on menu', async () => {
+    setup();
+
+    await userEvent.click(screen.getByTestId('menuIcon'));
+
+    expect(handleClick).not.toBeCalled();
   });
 });

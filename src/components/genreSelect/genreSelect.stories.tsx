@@ -13,7 +13,6 @@ export default {
   },
 } as ComponentMeta<typeof GenreSelect>;
 
-//👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof GenreSelect> = (args) => (
   <GenreSelect {...args} />
 );

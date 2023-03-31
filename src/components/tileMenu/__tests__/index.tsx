@@ -19,29 +19,29 @@ const setup = () => {
 };
 
 describe('Tile Menu', () => {
-  it('Renders menu icon without menu items', () => {
+  it('should renders menu icon without menu items', () => {
     const { button } = setup();
 
-    expect(button).toBeTruthy();
+    expect(button).toBeInTheDocument();
   });
 
-  it('Should not render menu items', () => {
+  it('should not render menu items', () => {
     setup();
 
-    expect(screen.queryByText('Edit')).toBeFalsy();
-    expect(screen.queryByText('Delete')).toBeFalsy();
+    expect(screen.queryByText('Edit')).not.toBeInTheDocument();
+    expect(screen.queryByText('Delete')).not.toBeInTheDocument();
   });
 
   describe('Edit menu item', () => {
-    it('Renders Edit menu item after icon clicked', async () => {
+    it('should renders Edit menu item after icon clicked', async () => {
       const { button } = setup();
 
       await userEvent.click(button);
 
-      expect(screen.getByText('Edit')).toBeTruthy();
+      expect(screen.getByText('Edit')).toBeInTheDocument();
     });
 
-    it('Should invoke onEdit after Edit item click', async () => {
+    it('should invoke onEdit after Edit item click', async () => {
       const { button } = setup();
 
       await userEvent.click(button);
@@ -52,15 +52,15 @@ describe('Tile Menu', () => {
   });
 
   describe('Delete menu item', () => {
-    it('Renders Delete menu item after icon clicked', async () => {
+    it('should renders Delete menu item after icon clicked', async () => {
       const { button } = setup();
 
       await userEvent.click(button);
 
-      expect(screen.getByText('Delete')).toBeTruthy();
+      expect(screen.getByText('Delete')).toBeInTheDocument();
     });
 
-    it('Should invoke onEdit after Edit item click', async () => {
+    it('should invoke onEdit after Edit item click', async () => {
       const { button } = setup();
 
       await userEvent.click(button);

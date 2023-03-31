@@ -14,11 +14,11 @@ const setup = () => {
 };
 
 describe('Movie Genres', () => {
-  it('Should render genres', () => {
+  it('should render genres', () => {
     setup();
 
     genres.map((genre) => {
-      expect(screen.getByText(genre, { exact: false })).toBeTruthy();
+      expect(screen.getByText(genre, { exact: false })).toBeInTheDocument();
     });
   });
 });
