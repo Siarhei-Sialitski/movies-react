@@ -5,20 +5,21 @@ export default class Counter extends React.Component<
   { counter: number }
 > {
   state = { counter: this.props.initialValue };
+
   render() {
     return React.createElement(
-      "div",
-      { className: "flex" },
+      'div',
+      { style: { display: 'flex' } },
       React.createElement(
-        "button",
-        { onClick: () => this.modify(-1), "data-testid": "decrement" },
-        "-"
+        'button',
+        { onClick: () => this.modify(-1), 'data-testid': 'decrement' },
+        '-'
       ),
-      React.createElement("p", {}, this.state.counter),
+      React.createElement('p', {}, this.state.counter),
       React.createElement(
-        "button",
-        { onClick: () => this.modify(1), "data-testid": "increment" },
-        "+"
+        'button',
+        { onClick: () => this.modify(1), 'data-testid': 'increment' },
+        '+'
       )
     );
   }

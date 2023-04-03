@@ -45,7 +45,7 @@ describe("Search", () => {
 
     await user.clear(input);
     await user.type(input, newInputValue);
-    await user.keyboard("Enter");
+    await user.keyboard("{Enter}");
 
     expect(handleSearchMock).toBeCalledTimes(1);
     expect(handleSearchMock).toBeCalledWith(newInputValue);
