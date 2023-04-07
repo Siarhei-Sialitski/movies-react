@@ -1,18 +1,24 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 import Dialog from '.';
 import { Button } from '@fluentui/react-components';
 
-export default {
+const meta = {
   title: 'Design System/Molecules/Dialog',
   component: Dialog,
+  argTypes: {
+    onClose: {
+      action: 'Close',
+    },
+  },
 } as ComponentMeta<typeof Dialog>;
 
-const Template: ComponentStory<typeof Dialog> = (args) => <Dialog {...args} />;
-
-export const ExampleDialog = Template.bind({});
-
-ExampleDialog.args = {
-  title: 'edit movie',
-  children: <Button />,
+type Story = ComponentStoryObj<typeof Dialog>;
+export const ExampleDialog: Story = {
+  args: {
+    title: 'edit movie',
+    children: <Button />,
+  },
 };
+
+export default meta;

@@ -1,23 +1,20 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 import MovieForm from './index';
 import { IMovie } from '../../shared/types';
 
-export default {
+const meta = {
   title: 'Design System/Organisms/Movie Form',
   component: MovieForm,
   argTypes: {
     onSubmit: { action: 'Submit' },
   },
 } as ComponentMeta<typeof MovieForm>;
+export default meta;
 
-const Template: ComponentStory<typeof MovieForm> = (args) => (
-  <MovieForm {...args} />
-);
+type Story = ComponentStoryObj<typeof MovieForm>;
 
-export const EmptyMovieForm = Template.bind({});
-
-EmptyMovieForm.args = {};
+export const EmptyMovieForm: Story = {};
 
 const initialMovie: IMovie = {
   movieId: '1',
@@ -30,8 +27,8 @@ const initialMovie: IMovie = {
   genres: ['Crime', 'Horror'],
 };
 
-export const FilledMovieForm = Template.bind({});
-
-FilledMovieForm.args = {
-  initialMovieInfo: initialMovie,
+export const FilledMovieForm: Story = {
+  args: {
+    initialMovieInfo: initialMovie,
+  },
 };

@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react';
 
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 
 import DeleteMovieForm from './index';
 
-export default {
+const meta = {
   title: 'Design System/Molecules/Delete Movie Form',
   component: DeleteMovieForm,
-  argTypes: { onConfirm: { action: 'confirmed' } },
+  argTypes: { onConfirm: { action: 'Confirm' } },
 } as ComponentMeta<typeof DeleteMovieForm>;
 
-const Template: ComponentStory<typeof DeleteMovieForm> = (args) => (
-  <DeleteMovieForm {...args} />
-);
+type Story = ComponentStoryObj<typeof DeleteMovieForm>;
 
-export const DeleteMovie = Template.bind({});
+export const DeleteMovie: Story = {};
 
 DeleteMovie.args = {};
+
+export default meta;
