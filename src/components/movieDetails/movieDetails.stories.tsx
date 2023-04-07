@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MovieDetails from './index';
 
 export default {
-  title: 'Movie Details',
+  title: 'Design System/Organisms/Movie Details',
   component: MovieDetails,
 } as ComponentMeta<typeof MovieDetails>;
 

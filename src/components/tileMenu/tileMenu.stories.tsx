@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TileMenu from './index';
 
 export default {
-  title: 'Tile Menu',
+  title: 'Design System/Atoms/Tile Menu',
   component: TileMenu,
 } as ComponentMeta<typeof TileMenu>;
 

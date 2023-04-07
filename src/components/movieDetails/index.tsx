@@ -16,7 +16,7 @@ const MovieDetails: React.FC<IMovieDetailsProps> = ({
   const styles = useStyles();
 
   return (
-    <div>
+    <>
       <div className={styles.container}>
         <img className={styles.image} src={imageUrl} alt={movieName} />
         <div className={styles.content}>
@@ -36,7 +36,7 @@ const MovieDetails: React.FC<IMovieDetailsProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

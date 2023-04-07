@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SortControl from './index';
 
 export default {
-  title: 'Sort Control',
+  title: 'Design System/Molecules/Sort Control',
   component: SortControl,
   argTypes: { onSelectionChanged: { action: 'selectionChanged' } },
 } as ComponentMeta<typeof SortControl>;
