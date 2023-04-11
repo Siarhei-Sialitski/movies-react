@@ -6,7 +6,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import GenreSelect from './index';
 
 export default {
-  title: 'Genre Select',
+  title: 'Design System/Atoms/Genre Select',
   component: GenreSelect,
   args: {
     onSelect: () => {},

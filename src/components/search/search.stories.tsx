@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Search from './index';
 
 export default {
-  title: 'Search',
+  title: 'Design System/Molecules/Search',
   component: Search,
   argTypes: { onSearch: { action: 'search' } },
 } as ComponentMeta<typeof Search>;

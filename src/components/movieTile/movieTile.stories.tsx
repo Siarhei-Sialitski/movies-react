@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MovieTile from './index';
 
 export default {
-  title: 'Movie Tile',
+  title: 'Design System/Organisms/Movie Tile',
   component: MovieTile,
   argTypes: {
     onClick: { action: 'clicked' },

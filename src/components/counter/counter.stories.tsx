@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Counter from './index';
 
 export default {
-  title: 'Counter',
+  title: 'Design System/Organisms/Counter',
   component: Counter,
 } as ComponentMeta<typeof Counter>;
 

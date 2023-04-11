@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MovieGenres from './index';
 
 export default {
-  title: 'Movie Genres',
+  title: 'Design System/Atoms/Movie Genres',
   component: MovieGenres,
 } as ComponentMeta<typeof MovieGenres>;
 
