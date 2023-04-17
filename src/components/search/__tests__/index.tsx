@@ -11,7 +11,7 @@ const setup = () => {
   );
   const user = userEvent.setup();
   const input = screen.getByTestId("search-input");
-  const button = screen.getByTestId("button");
+  const button = screen.getByTestId('search-button');
   return {
     input,
     button,

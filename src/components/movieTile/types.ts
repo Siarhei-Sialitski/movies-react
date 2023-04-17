@@ -1,10 +1,8 @@
+import { IMovie } from '../../shared/types';
+
 export interface IMovieTileProps {
-  movieId: string;
-  imageUrl: string;
-  movieName: string;
-  releaseYear: string;
-  genres: string[];
-  onClick: (movieId: string) => void;
-  onEdit: (movieId: string) => void;
-  onDelete: (movieId: string) => void;
+  movie: IMovie;
+  onClick: (id: number) => void;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
 }

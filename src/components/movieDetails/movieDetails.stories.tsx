@@ -1,33 +1,30 @@
-import React from 'react';
-
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-
+import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 import MovieDetails from './index';
+import { IMovie } from '../../shared/types';
 
-export default {
+const movie: IMovie = {
+  id: 337167,
+  title: 'Fifty Shades Freed',
+  vote_average: 6.1,
+  release_date: '2018-02-07',
+  poster_path:
+    'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg',
+  overview:
+    'Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.',
+  genres: ['Drama', 'Romance'],
+  runtime: 106,
+};
+
+const meta = {
   title: 'Design System/Organisms/Movie Details',
   component: MovieDetails,
 } as ComponentMeta<typeof MovieDetails>;
+export default meta;
 
-//👇 We create a “template” of how args map to rendering
-const Template: ComponentStory<typeof MovieDetails> = (args) => (
-  <MovieDetails {...args} />
-);
+type Story = ComponentStoryObj<typeof MovieDetails>;
 
-export const PulpFiction = Template.bind({});
-
-PulpFiction.args = {
-  imageUrl: '/images/Pulp Fiction.png',
-  movieName: 'Pulp Fiction',
-  releaseYear: '2003',
-  rating: 8.9,
-  genres: ['Drama', 'Biography', 'Music'],
-  duration: 154,
-  description: `Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit
-    men who are out to retrieve a suitcase stolen from their employer, mob boss 
-    Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his 
-    wife Mia (Uma Thurman) out a few days later when Wallace himself will be 
-    out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by 
-    Wallace to lose his fight. The lives of these seemingly unrelated people are 
-    woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra`,
+export const FiftyShadesFreed: Story = {
+  args: {
+    movie,
+  },
 };

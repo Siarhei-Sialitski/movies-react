@@ -19,9 +19,9 @@ const MovieForm: React.FC<IMovieFormProps> = ({
 }) => {
   const styles = useStyles();
   const titleInputId = useId('titleInput');
-  const movieUrlInputId = useId('movieUrlInput');
+  const posterPathInputId = useId('posterPathInput');
   const releaseDateInputId = useId('releaseDateId');
-  const ratingInputId = useId('ratingInput');
+  const voteAverageInputId = useId('voteAverageInput');
   const genreInputId = useId('genreInput');
   const runtimeInputId = useId('runtimeInput');
   const overwieInputId = useId('overwieInput');
@@ -34,7 +34,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
 
     movie = {
       ...movie,
-      movieId: initialMovieInfo?.movieId ?? '',
+      id: initialMovieInfo?.id ?? 0,
       genres: selectedOptions,
     };
     onSubmit(movie);
@@ -75,31 +75,31 @@ const MovieForm: React.FC<IMovieFormProps> = ({
           <Label htmlFor={releaseDateInputId}>release date</Label>
           <Input
             id={releaseDateInputId}
-            name='releaseDate'
-            value={initialMovieInfo?.releaseDate}
+            name='release_date'
+            value={initialMovieInfo?.release_date}
             placeholder='Select date'
             type='date'
-            data-testId='movieDate'
+            data-testId='releaseDate'
           />
         </div>
         <div className={styles.leftColumn}>
-          <Label htmlFor={movieUrlInputId}>movie url</Label>
+          <Label htmlFor={posterPathInputId}>movie url</Label>
           <Input
-            id={movieUrlInputId}
-            name='url'
-            defaultValue={initialMovieInfo?.url}
+            id={posterPathInputId}
+            name='poster_path'
+            defaultValue={initialMovieInfo?.poster_path}
             placeholder='https://'
-            data-testId='movieUrl'
+            data-testId='posterPath'
           />
         </div>
         <div className={styles.rightColumn}>
-          <Label htmlFor={ratingInputId}>rating</Label>
+          <Label htmlFor={voteAverageInputId}>rating</Label>
           <Input
-            id={ratingInputId}
-            name='rating'
-            defaultValue={`${initialMovieInfo?.rating ?? ''}`}
+            id={voteAverageInputId}
+            name='vote_average'
+            defaultValue={`${initialMovieInfo?.vote_average ?? ''}`}
             placeholder='7.8'
-            data-testId='movieRating'
+            data-testId='voteAverage'
           />
         </div>
         <div className={styles.leftColumn}>
@@ -124,10 +124,10 @@ const MovieForm: React.FC<IMovieFormProps> = ({
           <Label htmlFor={runtimeInputId}>runtime</Label>
           <Input
             id={runtimeInputId}
-            name='duration'
-            defaultValue={`${initialMovieInfo?.duration ?? ''}`}
+            name='runtime'
+            defaultValue={`${initialMovieInfo?.runtime ?? ''}`}
             placeholder='minutes'
-            data-testId='movieDuration'
+            data-testId='runtime'
           />
         </div>
         <div className={styles.fullColumn}>
@@ -136,9 +136,9 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             placeholder='Movie description'
             appearance='outline'
             id={overwieInputId}
-            name='description'
-            defaultValue={initialMovieInfo?.description}
-            data-testId='movieDescription'
+            name='overview'
+            defaultValue={initialMovieInfo?.overview}
+            data-testId='overview'
           />
         </div>
       </div>

@@ -15,7 +15,6 @@ const GenreSelect: React.FC<GenreSelectProps> = ({
       [styles.genreButtonSelected]: genre === selectedGenre,
     });
 
-    console.log(styles.genreButton);
     return (
       <button key={genre} className={btnClass} onClick={() => onSelect(genre)}>
         {genre}

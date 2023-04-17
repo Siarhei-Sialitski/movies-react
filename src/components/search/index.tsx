@@ -14,7 +14,7 @@ const Search: React.FC<SearchProps> = ({ initialValue, onSearch }) => {
   const styles = useStyles();
 
   return (
-    <>
+    <div className={styles.root}>
       <input
         className={styles.searchInput}
         value={searchValue}
@@ -30,11 +30,11 @@ const Search: React.FC<SearchProps> = ({ initialValue, onSearch }) => {
         onClick={() => {
           onSearch(searchValue);
         }}
-        data-testid='button'
+        data-testid='search-button'
       >
         search
       </button>
-    </>
+    </div>
   );
 };
 

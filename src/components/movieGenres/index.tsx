@@ -12,7 +12,11 @@ const MovieGenres: React.FC<MovieGenresProps> = ({ genres }) => {
     </span>
   ));
 
-  return <div className={styles.genres}>{genresList}</div>;
+  return (
+    <div className={styles.genres} data-testid='moviegenres'>
+      {genresList}
+    </div>
+  );
 };
 
 export default MovieGenres;

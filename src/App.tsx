@@ -1,41 +1,32 @@
 import { useState } from "react";
-import "./App.css";
-import Counter from "./components/counter";
-import GenreSelect from "./components/genreSelect";
-import Search from "./components/search";
-import React from 'react';
+import './App.css';
 import Dialog from './components/dialog';
 import { Button } from '@fluentui/react-components';
 import MovieForm from './components/movieForm';
 import { IMovie } from './shared/types';
+import useStyles from './styles';
+import MovieListPage from './components/movieListPage';
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState('All');
   const [showDialog, setShowDialog] = useState(false);
+  const styles = useStyles();
 
   const initialMovie: IMovie = {
-    movieId: '1',
-    title: 'Moana',
-    releaseDate: '2018-07-22',
-    url: 'https://www.moana.com',
-    rating: 7.6,
-    duration: 107,
-    description: `Moana Waialiki is a sea voyaging enthusiast and the only daughter of a chief in a long line of navigators. When her island's fishermen can't catch any fish and the crops fail, she learns that the demigod Maui caused the blight by stealing the heart of the goddess, Te Fiti. The only way to heal the island is to persuade Maui to return Te Fiti's heart, so Moana sets off on an epic journey across the Pacific. The film is based on stories from Polynesian mythology.`,
-    genres: ['Crime', 'Horror'],
+    id: 337167,
+    title: 'Fifty Shades Freed',
+    vote_average: 6.1,
+    release_date: '2018-02-07',
+    poster_path:
+      'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg',
+    overview:
+      'Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.',
+    genres: ['Drama', 'Romance'],
+    runtime: 106,
   };
 
   return (
-    <div className='App'>
-      <Counter initialValue={10} />
-      <Search initialValue='' onSearch={(s) => console.log(s)} />
-      <GenreSelect
-        genreNames={['All', 'Documentary', 'Comedy', 'Horror', 'Crime']}
-        selectedGenre={selectedGenre}
-        onSelect={(g) => {
-          console.log(g);
-          setSelectedGenre(g);
-        }}
-      />
+    <div className={styles.root}>
+      <MovieListPage />
       {showDialog && (
         <Dialog
           onClose={() => {
