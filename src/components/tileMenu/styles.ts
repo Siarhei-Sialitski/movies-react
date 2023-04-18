@@ -3,7 +3,6 @@ import { makeStyles, shorthands } from '@fluentui/react-components';
 const useStyles = makeStyles({
   menuIcon: {
     transform: 'rotate(90deg)',
-    position: 'absolute',
   },
   menuItem: {
     fontFamily: 'Montserrat',
@@ -19,7 +18,6 @@ const useStyles = makeStyles({
     },
   },
   menuPopover: {
-    position: 'absolute',
     top: '100px',
     backgroundColor: 'rgba(35, 35, 35, 0.918051)',
     backdropFilter: 'blur(13.5914px)',

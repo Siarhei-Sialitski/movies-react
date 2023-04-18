@@ -19,14 +19,16 @@ const meta = {
 } as ComponentMeta<typeof Dialog>;
 
 const initialMovie: IMovie = {
-  movieId: '1',
-  title: 'Moana',
-  releaseDate: '2018-07-22',
-  url: 'https://www.moana.com',
-  rating: 7.6,
-  duration: 107,
-  description: `Moana Waialiki is a sea voyaging enthusiast and the only daughter of a chief in a long line of navigators. When her island's fishermen can't catch any fish and the crops fail, she learns that the demigod Maui caused the blight by stealing the heart of the goddess, Te Fiti. The only way to heal the island is to persuade Maui to return Te Fiti's heart, so Moana sets off on an epic journey across the Pacific. The film is based on stories from Polynesian mythology.`,
-  genres: ['Crime', 'Horror'],
+  id: 337167,
+  title: 'Fifty Shades Freed',
+  vote_average: 6.1,
+  release_date: '2018-02-07',
+  poster_path:
+    'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg',
+  overview:
+    'Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.',
+  genres: ['Drama', 'Romance'],
+  runtime: 106,
 };
 
 type Story = ComponentStoryObj<typeof Dialog>;

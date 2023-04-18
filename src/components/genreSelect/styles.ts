@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     color: '#ffffff',
     ...shorthands.border('0'),
     ...shorthands.borderBottom('solid', 'transparent'),
-    backgroundColor: 'rgba(50, 50, 50, 0.8)',
+    backgroundColor: '#232323',
   },
   genreButtonSelected: {
     ...shorthands.borderBottom('4px', 'solid', '#F65261'),

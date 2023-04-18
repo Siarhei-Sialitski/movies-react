@@ -7,6 +7,10 @@ const useStyles = makeStyles({
     backgroundColor: '#232323',
     ...shorthands.padding('5px'),
     height: '530px',
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '20px',
   },
   wrapper: {
     display: 'grid',
@@ -31,10 +35,6 @@ const useStyles = makeStyles({
       '> span': {
         '> input': {
           height: '28px',
-          fontFamily: 'Montserrat',
-          fontStyle: 'normal',
-          fontWeight: '400',
-          fontSize: '20px',
           lineHeight: '24px',
           color: '#FFFFFF',
           backgroundColor: 'rgba(50, 50, 50, 0.948044)',
@@ -47,10 +47,6 @@ const useStyles = makeStyles({
         },
         '> select': {
           height: '28px',
-          fontFamily: 'Montserrat',
-          fontStyle: 'normal',
-          fontWeight: '400',
-          fontSize: '20px',
           lineHeight: '24px',
           color: '#FFFFFF',
           backgroundColor: 'rgba(50, 50, 50, 0.948044)',
@@ -64,10 +60,6 @@ const useStyles = makeStyles({
         },
         '> textarea': {
           height: '200px',
-          fontFamily: 'Montserrat',
-          fontStyle: 'normal',
-          fontWeight: '400',
-          fontSize: '20px',
           lineHeight: '24px',
           color: '#FFFFFF',
           backgroundColor: 'rgba(50, 50, 50, 0.948044)',
@@ -132,8 +124,6 @@ const useStyles = makeStyles({
   dropDown: {
     minWidth: '150px',
     float: 'right',
-    fontFamily: 'Montserrat',
-    fontStyle: 'normal',
     fontWeight: '500',
     fontSize: '16px',
     lineHeight: '20px',
@@ -142,13 +132,15 @@ const useStyles = makeStyles({
     color: '#FFFFFF',
   },
   option: {
-    fontFamily: 'Montserrat',
-    fontStyle: 'normal',
     fontWeight: '500',
     fontSize: '16px',
     lineHeight: '20px',
     letterSpacing: '0.888889px',
     color: '#FFFFFF',
+    backgroundColor: 'black',
+    ':hover': {
+      backgroundColor: 'black',
+    },
   },
   expandIcon: {
     color: '#F65261',

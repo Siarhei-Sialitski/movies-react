@@ -1,7 +1,12 @@
 import { makeStyles, shorthands } from '@fluentui/react-components';
-import { text } from 'stream/consumers';
 
 const useStyles = makeStyles({
+  rootContainer: {
+    width: '330px',
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontWeight: '500',
+  },
   image: {
     width: '323.41px',
     height: '486px',
@@ -18,9 +23,6 @@ const useStyles = makeStyles({
   tileMovieName: {
     width: '232px',
     height: '22px',
-    fontFamily: 'Montserrat',
-    fontStyle: 'normal',
-    fontWeight: '500',
     fontSize: '18px',
     lineHeight: '22px',
     color: '#FFFFFF',
@@ -45,9 +47,6 @@ const useStyles = makeStyles({
   spanTileReleaseYear: {
     width: '50px',
     height: '17px',
-    fontFamily: 'Montserrat',
-    fontStyle: 'normal',
-    fontWeight: '500',
     fontSize: '14px',
     lineHeight: '17px',
     textAlign: 'center',
@@ -59,9 +58,9 @@ const useStyles = makeStyles({
     float: 'left',
   },
   menu: {
-    position: 'absolute',
-    top: '22px',
-    left: '300px',
+    position: 'relative',
+    top: '40px',
+    left: '280px',
   },
 });
 

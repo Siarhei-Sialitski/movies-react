@@ -11,7 +11,6 @@ const useStyles = makeStyles({
     lineHeight: '17px',
     color: '#FFFFFF',
     mixBlendMode: 'normal',
-    opacity: '0.5',
   },
 });
 
