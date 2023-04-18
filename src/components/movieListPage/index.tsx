@@ -10,12 +10,13 @@ import SortControl from '../sortControl';
 import useStyles from './styles';
 import { Search28Regular } from '@fluentui/react-icons';
 import { Button } from '@fluentui/react-components';
+import { IMovie } from '../../shared/types';
 
 const MovieListPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortCriteria, setSortCriteria] = useState(sortCriterias[0]);
   const [activeGenre, setActiveGenre] = useState(genres[0]);
-  const [selectedMovieId, setSelectedMovieId] = useState<number | undefined>(
+  const [selectedMovie, setSelectedMovie] = useState<IMovie | undefined>(
     undefined
   );
 
@@ -29,7 +30,7 @@ const MovieListPage: React.FC = () => {
         <MovieTile
           movie={movie}
           onClick={(id) => {
-            setSelectedMovieId(id);
+            setSelectedMovie(movies.filter((m) => m.id === id)[0]);
           }}
           onEdit={() => {}}
           onDelete={() => {}}
@@ -40,19 +41,17 @@ const MovieListPage: React.FC = () => {
 
   return (
     <div className={styles.rootContainer}>
-      {selectedMovieId ? (
+      {selectedMovie ? (
         <div className={styles.detailsContainer}>
           <Button
             icon={<Search28Regular />}
             className={styles.searchIcon}
             onClick={() => {
-              setSelectedMovieId(undefined);
+              setSelectedMovie(undefined);
             }}
             data-testid='searchicon'
           />
-          <MovieDetails
-            movie={movies.filter((m) => m.id === selectedMovieId)[0]}
-          />
+          <MovieDetails movie={selectedMovie} />
         </div>
       ) : (
         <div className={styles.searchContainer}>
