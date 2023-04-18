@@ -4,12 +4,10 @@ import Dialog from './components/dialog';
 import { Button } from '@fluentui/react-components';
 import MovieForm from './components/movieForm';
 import { IMovie } from './shared/types';
-import useStyles from './styles';
 import MovieListPage from './components/movieListPage';
 
 function App() {
   const [showDialog, setShowDialog] = useState(false);
-  const styles = useStyles();
 
   const initialMovie: IMovie = {
     id: 337167,
@@ -25,7 +23,7 @@ function App() {
   };
 
   return (
-    <div className={styles.root}>
+    <>
       <MovieListPage />
       {showDialog && (
         <Dialog
@@ -49,7 +47,7 @@ function App() {
       >
         Show dialog
       </Button>
-    </div>
+    </>
   );
 }
 

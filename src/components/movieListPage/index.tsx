@@ -30,7 +30,7 @@ const MovieListPage: React.FC = () => {
         <MovieTile
           movie={movie}
           onClick={(id) => {
-            setSelectedMovie(movies.filter((m) => m.id === id)[0]);
+            setSelectedMovie(movies.find((m) => m.id === id));
           }}
           onEdit={() => {}}
           onDelete={() => {}}

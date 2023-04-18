@@ -38,7 +38,7 @@ context('Movie List Page component', () => {
       cy.contains('1925');
     });
 
-    it('shoud contain all 10 movies with if filtere by genre', () => {
+    it('shoud contain filtered genre in all 10 movies if filtered by genre', () => {
       cy.get('button').contains('Documentary').click();
 
       cy.get('[data-testid="moviegenres"]').should('contain', 'Documentary');

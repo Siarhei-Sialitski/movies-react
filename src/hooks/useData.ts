@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { allGenre, moviesApiBaseUrl } from '../shared/constants';
 import { IMovie } from '../shared/types';
 
 const useMovies = (
@@ -10,7 +11,7 @@ const useMovies = (
 
   useEffect(() => {
     let filter = '';
-    if (activeGenre !== 'All') {
+    if (activeGenre !== allGenre) {
       filter = `&filter=${activeGenre}`;
     }
 
@@ -31,8 +32,9 @@ const useMovies = (
 
     const dataFetch = async () => {
       try {
+        setResponseData([]);
         const response = await fetch(
-          `http://localhost:4000/movies?&${search}${filter}${sortByQueryParam}`,
+          `${moviesApiBaseUrl}?&${search}${filter}${sortByQueryParam}`,
           { signal }
         );
         const data = await response.json();
