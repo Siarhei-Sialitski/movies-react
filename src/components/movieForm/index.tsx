@@ -9,7 +9,7 @@ import {
   Option,
 } from '@fluentui/react-components';
 import useStyles from './styles';
-import { IMovie } from '../../shared/types';
+import { IMovie, OptionOnSelectData } from '../../shared/types';
 import { TriangleDown12Filled } from '@fluentui/react-icons';
 import { genres } from '../../shared/constants';
 
@@ -44,7 +44,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
     initialMovieInfo?.genres ?? []
   );
 
-  const handleOptionSelect = (ev: unknown, data: any) => {
+  const handleOptionSelect = (ev: unknown, data: OptionOnSelectData) => {
     setSelectedOptions(data.selectedOptions);
     setValue(data.selectedOptions.join(', '));
   };
@@ -59,7 +59,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
   });
 
   return (
-    <form className={styles.root} onSubmit={handleSubmit} data-testId='form'>
+    <form className={styles.root} onSubmit={handleSubmit} data-testid='form'>
       <div className={styles.wrapper}>
         <div className={styles.leftColumn}>
           <Label htmlFor={titleInputId}>title</Label>
@@ -68,7 +68,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             name='title'
             defaultValue={initialMovieInfo?.title}
             placeholder='Movie title'
-            data-testId='movieTitle'
+            data-testid='movieTitle'
           />
         </div>
         <div className={styles.rightColumn}>
@@ -79,7 +79,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             value={initialMovieInfo?.release_date}
             placeholder='Select date'
             type='date'
-            data-testId='releaseDate'
+            data-testid='releaseDate'
           />
         </div>
         <div className={styles.leftColumn}>
@@ -89,7 +89,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             name='poster_path'
             defaultValue={initialMovieInfo?.poster_path}
             placeholder='https://'
-            data-testId='posterPath'
+            data-testid='posterPath'
           />
         </div>
         <div className={styles.rightColumn}>
@@ -99,7 +99,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             name='vote_average'
             defaultValue={`${initialMovieInfo?.vote_average ?? ''}`}
             placeholder='7.8'
-            data-testId='voteAverage'
+            data-testid='voteAverage'
           />
         </div>
         <div className={styles.leftColumn}>
@@ -115,7 +115,6 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             selectedOptions={selectedOptions}
             value={value}
             placeholder='Select genres'
-            data-testId='movieGenres'
           >
             {optionList}
           </Dropdown>
@@ -127,7 +126,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             name='runtime'
             defaultValue={`${initialMovieInfo?.runtime ?? ''}`}
             placeholder='minutes'
-            data-testId='runtime'
+            data-testid='runtime'
           />
         </div>
         <div className={styles.fullColumn}>
@@ -138,7 +137,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             id={overwieInputId}
             name='overview'
             defaultValue={initialMovieInfo?.overview}
-            data-testId='overview'
+            data-testid='overview'
           />
         </div>
       </div>

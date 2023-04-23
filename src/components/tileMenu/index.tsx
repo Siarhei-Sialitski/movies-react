@@ -31,7 +31,7 @@ const TileMenu: React.FC<ITileMenuProps> = ({ onEdit, onDelete }) => {
           <MenuButton
             data-testid='menuIcon'
             className={styles.menuIcon}
-            icon={<MoreCircle32Filled filled={true} />}
+            icon={<MoreCircle32Filled />}
           ></MenuButton>
         </MenuTrigger>
 

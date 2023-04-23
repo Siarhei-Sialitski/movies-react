@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Counter from "../index";
-import React from 'react';
+import Counter from '../index';
 
 const initialValue = 10;
 const setup = () => {

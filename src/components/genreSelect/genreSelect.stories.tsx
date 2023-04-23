@@ -1,15 +1,13 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import React from 'react';
-
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
 import GenreSelect from './index';
 
 export default {
   title: 'Design System/Atoms/Genre Select',
   component: GenreSelect,
-  args: {
-    onSelect: () => {},
+  argTypes: {
+    onSelect: {
+      action: 'select',
+    },
   },
 } as ComponentMeta<typeof GenreSelect>;
 

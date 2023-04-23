@@ -8,3 +8,9 @@ export interface IMovie {
   genres: string[];
   runtime: number;
 }
+
+export type OptionOnSelectData = {
+  optionValue: string | undefined;
+  optionText: string | undefined;
+  selectedOptions: string[];
+};

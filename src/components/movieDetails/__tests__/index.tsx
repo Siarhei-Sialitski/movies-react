@@ -1,8 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { enableFetchMocks } from 'jest-fetch-mock';
+enableFetchMocks();
+
+import { render, screen, waitFor } from '@testing-library/react';
 import MovieDetails from '..';
 import userEvent from '@testing-library/user-event';
 import { minutesToHMText } from '../../../utils/dateTimeUtils';
 import { IMovie } from '../../../shared/types';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 const movie: IMovie = {
   id: 337167,
@@ -17,46 +21,65 @@ const movie: IMovie = {
   runtime: 106,
 };
 
-const setup = () => {
-  userEvent.setup();
-  const utils = render(<MovieDetails movie={movie} />);
+const loaderReponse = {
+  movie,
+};
 
-  return {
-    ...utils,
-  };
+const setup = () => {
+  const routes = [
+    {
+      path: '/movieId',
+      element: <MovieDetails />,
+      loader: () => loaderReponse,
+    },
+  ];
+
+  userEvent.setup();
+  const router = createMemoryRouter(routes, {
+    initialEntries: ['/movieId'],
+  });
+  render(<RouterProvider router={router} />);
 };
 
 describe('Movie details', () => {
-  it('should render movie name', () => {
+  it('should render movie name', async () => {
     setup();
 
-    expect(screen.getByText(movie.title)).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText(movie.title)).toBeInTheDocument()
+    );
   });
 
-  it('should render release year', () => {
+  it('should render release year', async () => {
     setup();
 
-    expect(
-      screen.getByText(movie.release_date.slice(0, 4))
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(
+        screen.getByText(movie.release_date.slice(0, 4))
+      ).toBeInTheDocument()
+    );
   });
 
-  it('should render rating', () => {
+  it('should render rating', async () => {
     setup();
 
-    expect(screen.getByText(movie.vote_average)).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText(movie.vote_average)).toBeInTheDocument()
+    );
   });
 
-  it('should render description', () => {
+  it('should render description', async () => {
     setup();
 
-    expect(screen.getByText(movie.overview)).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText(movie.overview)).toBeInTheDocument()
+    );
   });
 
-  it('should render duration', () => {
+  it('should render duration', async () => {
     setup();
     const hmText = minutesToHMText(movie.runtime);
 
-    expect(screen.getByText(hmText)).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByText(hmText)).toBeInTheDocument());
   });
 });
