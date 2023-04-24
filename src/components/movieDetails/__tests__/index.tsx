@@ -28,7 +28,7 @@ const loaderReponse = {
 const setup = () => {
   const routes = [
     {
-      path: '/movieId',
+      path: '/:movieId',
       element: <MovieDetails />,
       loader: () => loaderReponse,
     },
@@ -36,7 +36,7 @@ const setup = () => {
 
   userEvent.setup();
   const router = createMemoryRouter(routes, {
-    initialEntries: ['/movieId'],
+    initialEntries: ['/1'],
   });
   render(<RouterProvider router={router} />);
 };

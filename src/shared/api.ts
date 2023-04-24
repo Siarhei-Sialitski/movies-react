@@ -6,6 +6,9 @@ export const getMovie = async (movieId: string, signal: AbortSignal) => {
       const response = await fetch(`${moviesApiBaseUrl}/${movieId}`, {
         signal,
       });
+      if (!response.ok) {
+        throw new Error('Internal Error');
+      }
       const data = await response.json();
       return { movie: data };
     } catch (ex) {
@@ -13,7 +16,7 @@ export const getMovie = async (movieId: string, signal: AbortSignal) => {
       if (error && error.name === 'AbortError') {
         console.log(error.message);
       }
-      return null;
+      throw new Error('Internal Error');
     }
   };
 
@@ -49,13 +52,16 @@ export const getMovies = async (
         `${moviesApiBaseUrl}?&${searchQueryParam}${filterQueryParam}${sortByQueryParam}`,
         { signal }
       );
+      if (!response.ok) {
+        throw new Error('Internal Error');
+      }
       return await response.json();
     } catch (ex) {
       const error = ex as Error;
       if (error && error.name === 'AbortError') {
         console.log(error.message);
       }
-      return [];
+      throw new Error('Internal Error');
     }
   };
 

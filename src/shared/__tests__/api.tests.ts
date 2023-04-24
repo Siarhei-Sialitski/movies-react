@@ -38,7 +38,6 @@ const setupGetMovies = (search: string, filter: string, sortBy: string) => {
     await getMovies(search, filter, sortBy, signal);
   return {
     getMovies: getMoviesFunc,
-    controller,
   };
 };
 
@@ -145,13 +144,11 @@ describe('getMovies', () => {
   });
 
   it('should return empty array if rejected', async () => {
-    const { getMovies, controller } = setupGetMovies('', '', 'Release Date');
-    await getMovies();
+    fetchMock.resetMocks();
+    fetchMock.mockRejectOnce();
+    const { getMovies } = setupGetMovies('', '', 'Release Date');
 
-    controller.abort();
-    const result = await getMovies();
-
-    expect(result.length).toEqual(0);
+    await expect(getMovies()).rejects.toThrow();
   });
 });
 
@@ -170,12 +167,10 @@ describe('getMovie', () => {
   });
 
   it('should return null if rejected', async () => {
-    const { getMovie, controller } = setupGetMovie('');
-    await getMovie();
+    fetchMock.resetMocks();
+    fetchMock.mockRejectOnce();
+    const { getMovie } = setupGetMovie('');
 
-    controller.abort();
-    const result = await getMovie();
-
-    expect(result).toBeNull();
+    await expect(getMovie()).rejects.toThrow();
   });
 });

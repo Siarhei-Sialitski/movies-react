@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React from 'react';
+import React, { useState } from 'react';
 import { genres, sortCriterias } from '../../shared/constants';
 import GenreSelect from '../genreSelect';
 import MovieTile from '../movieTile';
@@ -32,7 +32,10 @@ const MovieListPage: React.FC = () => {
         <MovieTile
           movie={movie}
           onClick={(id) => {
-            navigate({ pathname: `${id}`, search: searchParams.toString() });
+            if (!movieId) {
+              navigate({ pathname: `${id}`, search: searchParams.toString() });
+            } else if (+movieId !== id)
+              navigate({ pathname: `${id}`, search: searchParams.toString() });
           }}
           onEdit={() => {}}
           onDelete={() => {}}
@@ -42,15 +45,24 @@ const MovieListPage: React.FC = () => {
   });
 
   const handleGenreSelect = (selectedGenre: string) => {
-    selectedGenre !== 'All'
-      ? searchParams.set('genre', selectedGenre)
-      : searchParams.delete('genre');
-    setSearchParams(searchParams);
+    if (selectedGenre === 'All') {
+      if (searchParams.get('genre')) {
+        searchParams.delete('genre');
+        setSearchParams(searchParams);
+      }
+    } else {
+      if (searchParams.get('genre') !== selectedGenre) {
+        searchParams.set('genre', selectedGenre);
+        setSearchParams(searchParams);
+      }
+    }
   };
 
   const handleSortingSelect = (selection: string) => {
-    searchParams.set('sortBy', selection);
-    setSearchParams(searchParams);
+    if (searchParams.get('sortBy') !== selection) {
+      searchParams.set('sortBy', selection);
+      setSearchParams(searchParams);
+    }
   };
   const headerClass = movieId
     ? styles.detailsContainer

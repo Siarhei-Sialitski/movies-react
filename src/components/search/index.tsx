@@ -17,10 +17,12 @@ const Search: React.FC = () => {
   const styles = useStyles();
 
   const handleSearch = () => {
-    searchValue
-      ? searchParams.set('query', searchValue)
-      : searchParams.delete('query');
-    setSearchParams(searchParams);
+    if (searchParams.get('query') !== searchValue) {
+      searchValue
+        ? searchParams.set('query', searchValue)
+        : searchParams.delete('query');
+      setSearchParams(searchParams);
+    }
   };
 
   return (
