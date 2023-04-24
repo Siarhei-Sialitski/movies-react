@@ -1,10 +1,17 @@
 import React from 'react';
+import {
+  LoaderFunction,
+  LoaderFunctionArgs,
+  useLoaderData,
+} from 'react-router-dom';
+import { getMovie } from '../../shared/api';
 import { minutesToHMText } from '../../utils/dateTimeUtils';
 import MovieGenres from '../movieGenres';
 import useStyles from './styles';
-import { IMovieDetailsProps } from './types';
+import { IMovieLoaderData } from './types';
 
-const MovieDetails: React.FC<IMovieDetailsProps> = ({ movie }) => {
+const MovieDetails: React.FC = () => {
+  const { movie } = useLoaderData() as IMovieLoaderData;
   const styles = useStyles();
 
   return (
@@ -12,7 +19,9 @@ const MovieDetails: React.FC<IMovieDetailsProps> = ({ movie }) => {
       <img className={styles.image} src={movie.poster_path} alt={movie.title} />
       <div className={styles.content}>
         <div className={styles.movieName}>
-          <span className={styles.movieName}>{movie.title}</span>
+          <span className={styles.movieName} data-testid='moviedetails-title'>
+            {movie.title}
+          </span>
         </div>
         <div className={styles.rating}>
           <span className={styles.detailsRating}>{movie.vote_average}</span>
@@ -31,6 +40,16 @@ const MovieDetails: React.FC<IMovieDetailsProps> = ({ movie }) => {
       </div>
     </div>
   );
+};
+
+export const movieLoader: LoaderFunction = async ({
+  params,
+  request,
+}: LoaderFunctionArgs) => {
+  const movieId = params.movieId as string;
+  if (movieId) {
+    return await getMovie(movieId, request.signal);
+  }
 };
 
 export default MovieDetails;

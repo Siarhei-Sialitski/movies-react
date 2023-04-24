@@ -4,6 +4,7 @@ import { Dropdown, Option, useId } from '@fluentui/react-components';
 import useStyles from './styles';
 import { TriangleDown12Filled } from '@fluentui/react-icons';
 import { sortCriterias } from '../../shared/constants';
+import { OptionOnSelectData } from '../../shared/types';
 
 const SortControl: React.FC<ISortControlProps> = ({
   currentSelection,
@@ -12,7 +13,7 @@ const SortControl: React.FC<ISortControlProps> = ({
   const styles = useStyles();
   const dropdownId = useId('dropdown');
 
-  const handleOptionSelect = (ev: any, data: any) => {
+  const handleOptionSelect = (ev: unknown, data: OptionOnSelectData) => {
     onSelectionChanged(data.selectedOptions[0]);
   };
 

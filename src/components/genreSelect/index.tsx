@@ -11,12 +11,19 @@ const GenreSelect: React.FC<GenreSelectProps> = ({
   const styles = useStyles();
 
   const genreItems = genreNames.map((genre) => {
+    const isSelected = genre === selectedGenre;
     const btnClass = classNames(styles.genreButton, {
-      [styles.genreButtonSelected]: genre === selectedGenre,
+      [styles.genreButtonSelected]: isSelected,
     });
+    const datatestid = isSelected ? 'activegenrebutton' : 'genrebutton';
 
     return (
-      <button key={genre} className={btnClass} onClick={() => onSelect(genre)}>
+      <button
+        key={genre}
+        className={btnClass}
+        onClick={() => onSelect(genre)}
+        data-testid={datatestid}
+      >
         {genre}
       </button>
     );

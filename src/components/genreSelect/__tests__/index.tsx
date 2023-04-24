@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import GenreSelect from "../index";
-import userEvent from "@testing-library/user-event";
-import React from 'react';
+import userEvent from '@testing-library/user-event';
 
 const genres = ["All", "Documentary", "Comedy", "Horror", "Crime"];
 const selectedGenre = genres[0];

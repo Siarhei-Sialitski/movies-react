@@ -1,20 +1,32 @@
-import React, { useState } from "react";
-import { SearchProps } from "./types";
+import React, { useState } from 'react';
 import useStyles from './styles';
+import { useSearchParams } from 'react-router-dom';
 
-const Search: React.FC<SearchProps> = ({ initialValue, onSearch }) => {
-  const [searchValue, setSearchValue] = useState(initialValue);
+const Search: React.FC = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get('query') ?? ''
+  );
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      onSearch(searchValue);
+      handleSearch();
     }
   };
 
   const styles = useStyles();
 
+  const handleSearch = () => {
+    if (searchParams.get('query') !== searchValue) {
+      searchValue
+        ? searchParams.set('query', searchValue)
+        : searchParams.delete('query');
+      setSearchParams(searchParams);
+    }
+  };
+
   return (
-    <div className={styles.root}>
+    <div className={styles.root} data-testid='search'>
       <input
         className={styles.searchInput}
         value={searchValue}
@@ -27,9 +39,7 @@ const Search: React.FC<SearchProps> = ({ initialValue, onSearch }) => {
       />
       <button
         className={styles.searchButton}
-        onClick={() => {
-          onSearch(searchValue);
-        }}
+        onClick={handleSearch}
         data-testid='search-button'
       >
         search

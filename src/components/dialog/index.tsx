@@ -21,7 +21,7 @@ const Dialog: React.FC<IDialogProps> = ({ title, children, onClose }) => {
           <div className={styles.container}>
             <div className={styles.header}>
               <Button
-                data-testId='dismissButton'
+                data-testid='dismissButton'
                 tabIndex={100}
                 className={styles.dismissButton}
                 onClick={onClose}

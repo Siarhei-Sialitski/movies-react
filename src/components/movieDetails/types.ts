@@ -1,5 +1,5 @@
 import { IMovie } from '../../shared/types';
 
-export interface IMovieDetailsProps {
+export interface IMovieLoaderData {
   movie: IMovie;
-}
+};

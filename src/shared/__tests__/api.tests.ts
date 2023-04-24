@@ -1,9 +1,8 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
 enableFetchMocks();
 
-import useData from '../useData';
+import { getMovie, getMovies } from '../api';
 import fetchMock from 'jest-fetch-mock';
-import { renderHook, waitFor } from '@testing-library/react';
 
 const movies = [
   {
@@ -32,23 +31,43 @@ const movies = [
   },
 ];
 
-describe('useData', () => {
+const setupGetMovies = (search: string, filter: string, sortBy: string) => {
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const getMoviesFunc = async () =>
+    await getMovies(search, filter, sortBy, signal);
+  return {
+    getMovies: getMoviesFunc,
+  };
+};
+
+const setupGetMovie = (movieId: string) => {
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const getMovieFunc = async () => await getMovie(movieId, signal);
+  return {
+    getMovie: getMovieFunc,
+    controller,
+  };
+};
+
+describe('getMovies', () => {
   beforeEach(() => {
     fetchMock.resetMocks();
     fetchMock.mockResponseOnce(JSON.stringify({ data: movies }));
   });
 
   it('should return fetch data response', async () => {
-    const { result } = await renderHook(() => useData('', '', 'Title'));
+    const { getMovies } = setupGetMovies('', '', 'Title');
+    const result = await getMovies();
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    await waitFor(() => {
-      expect(result.current).toEqual(movies);
-    });
+    expect(result).toEqual({ data: movies });
   });
 
-  it('should not contain filter if "all" passed', () => {
-    renderHook(() => useData('', 'All', 'Title'));
+  it('should not contain filter if "all" passed', async () => {
+    const { getMovies } = setupGetMovies('', 'All', 'Title');
+    await getMovies();
 
     expect(fetchMock).toHaveBeenCalledWith(
       expect.not.stringContaining('filter'),
@@ -56,9 +75,10 @@ describe('useData', () => {
     );
   });
 
-  it('should contain filter param with genre if genre passed', () => {
+  it('should contain filter param with genre if genre passed', async () => {
     const genre = 'Comedy';
-    renderHook(() => useData('', genre, 'Title'));
+    const { getMovies } = setupGetMovies('', genre, 'Title');
+    await getMovies();
 
     expect(fetchMock).toHaveBeenCalledWith(
       expect.stringContaining('filter'),
@@ -70,8 +90,9 @@ describe('useData', () => {
     );
   });
 
-  it('should not contain search param if search query not passed', () => {
-    renderHook(() => useData('', '', 'Title'));
+  it('should not contain search param if search query not passed', async () => {
+    const { getMovies } = setupGetMovies('', '', 'Title');
+    await getMovies();
 
     expect(fetchMock).toHaveBeenCalledWith(
       expect.not.stringContaining('search'),
@@ -83,9 +104,10 @@ describe('useData', () => {
     );
   });
 
-  it('should contain search param if search query passed', () => {
+  it('should contain search param if search query passed', async () => {
     const searchQuery = 'The';
-    renderHook(() => useData(searchQuery, '', 'Title'));
+    const { getMovies } = setupGetMovies(searchQuery, '', 'Title');
+    await getMovies();
 
     expect(fetchMock).toHaveBeenCalledWith(
       expect.stringContaining('search'),
@@ -101,8 +123,9 @@ describe('useData', () => {
     );
   });
 
-  it('should contain sort by title param if sort title passed', () => {
-    renderHook(() => useData('', '', 'Title'));
+  it('should contain sort by title param if sort title passed', async () => {
+    const { getMovies } = setupGetMovies('', '', 'Title');
+    await getMovies();
 
     expect(fetchMock).toHaveBeenCalledWith(
       expect.stringContaining('sortBy=title&sortOrder=asc'),
@@ -110,8 +133,9 @@ describe('useData', () => {
     );
   });
 
-  it('should contain sort by release_date param if sort by release date passed', () => {
-    renderHook(() => useData('', '', 'Release Date'));
+  it('should contain sort by release_date param if sort by release date passed', async () => {
+    const { getMovies } = setupGetMovies('', '', 'Release Date');
+    await getMovies();
 
     expect(fetchMock).toHaveBeenCalledWith(
       expect.stringContaining('sortBy=release_date&sortOrder=asc'),
@@ -122,11 +146,31 @@ describe('useData', () => {
   it('should return empty array if rejected', async () => {
     fetchMock.resetMocks();
     fetchMock.mockRejectOnce();
+    const { getMovies } = setupGetMovies('', '', 'Release Date');
 
-    const { result } = renderHook(() => useData('', '', 'Release Date'));
+    await expect(getMovies()).rejects.toThrow();
+  });
+});
 
-    await waitFor(() => {
-      expect(result.current.length).toEqual(0);
-    });
+describe('getMovie', () => {
+  beforeEach(() => {
+    fetchMock.resetMocks();
+    fetchMock.mockResponseOnce(JSON.stringify(movies[0]));
+  });
+
+  it('should return fetch data response', async () => {
+    const { getMovie } = setupGetMovie('1');
+    const result = await getMovie();
+    console.log(result);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(result).toEqual({ movie: movies[0] });
+  });
+
+  it('should return null if rejected', async () => {
+    fetchMock.resetMocks();
+    fetchMock.mockRejectOnce();
+    const { getMovie } = setupGetMovie('');
+
+    await expect(getMovie()).rejects.toThrow();
   });
 });

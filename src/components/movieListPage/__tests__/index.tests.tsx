@@ -1,6 +1,10 @@
+import { enableFetchMocks } from 'jest-fetch-mock';
+enableFetchMocks();
+
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import MovieListPage from '..';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 const movies = [
   {
@@ -29,13 +33,24 @@ const movies = [
   },
 ];
 
-jest.mock('../../../hooks/useData', () => {
-  return jest.fn(() => movies);
-});
+const loaderReponse = {
+  data: movies,
+};
 
 const setup = () => {
-  const user = userEvent.setup();
-  const utils = render(<MovieListPage />);
+  const routes = [
+    {
+      path: '/',
+      element: <MovieListPage />,
+      loader: () => loaderReponse,
+    },
+  ];
+
+  userEvent.setup();
+  const router = createMemoryRouter(routes, {
+    initialEntries: ['/'],
+  });
+  render(<RouterProvider router={router} />);
 };
 
 describe('MovieListPage', () => {
@@ -45,37 +60,18 @@ describe('MovieListPage', () => {
     done();
   });
 
-  it('should render all movies', () => {
+  it('should render all movies', async () => {
     setup();
 
-    movies.map((m) => {
-      expect(screen.getByText(m.title)).toBeInTheDocument();
-    });
+    await waitFor(() =>
+      movies.map((m) => {
+        expect(screen.getByText(m.title)).toBeInTheDocument();
+      })
+    );
   });
 
   it('should not render movie details after render', async () => {
     setup();
-
-    expect(screen.queryByTestId('searchicon')).not.toBeInTheDocument();
-    expect(
-      screen.queryByTestId('moviedetailsrootcontainer')
-    ).not.toBeInTheDocument();
-  });
-
-  it('should render movie details if user clicked on tile', async () => {
-    setup();
-
-    await userEvent.click(screen.getAllByTestId('movietilerootcontainer')[0]);
-
-    expect(screen.getByTestId('searchicon')).toBeInTheDocument();
-    expect(screen.getByTestId('moviedetailsrootcontainer')).toBeInTheDocument();
-  });
-
-  it('should not render movie details after user click search icon', async () => {
-    setup();
-
-    await userEvent.click(screen.getAllByTestId('movietilerootcontainer')[0]);
-    await userEvent.click(screen.getByTestId('searchicon'));
 
     expect(screen.queryByTestId('searchicon')).not.toBeInTheDocument();
     expect(

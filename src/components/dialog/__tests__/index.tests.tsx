@@ -27,7 +27,7 @@ describe('Dialog', () => {
 
   it('should render title JSX element', () => {
     const titleText = 'Test title';
-    setup(<h1 data-testId='titleElement'>{titleText}</h1>, <></>);
+    setup(<h1 data-testid='titleElement'>{titleText}</h1>, <></>);
 
     expect(screen.getByText(titleText)).toBeInTheDocument();
     expect(screen.getByTestId('titleElement')).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe('Dialog', () => {
     setup(
       'title',
       <>
-        <input type='text' data-testId='testinput' />
+        <input type='text' data-testid='testinput' />
       </>
     );
 

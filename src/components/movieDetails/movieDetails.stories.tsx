@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStoryObj } from '@storybook/react';
 import MovieDetails from './index';
 import { IMovie } from '../../shared/types';
+import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 const movie: IMovie = {
   id: 337167,
@@ -15,16 +16,34 @@ const movie: IMovie = {
   runtime: 106,
 };
 
+const loaderReponse = {
+  movie,
+};
+
 const meta = {
   title: 'Design System/Organisms/Movie Details',
   component: MovieDetails,
+  decorators: [
+    (Story) => (
+      <RouterProvider
+        router={createMemoryRouter(
+          [
+            {
+              path: '/:movieId',
+              element: <Story />,
+              loader: () => loaderReponse,
+            },
+          ],
+          {
+            initialEntries: ['/11'],
+          }
+        )}
+      />
+    ),
+  ],
 } as ComponentMeta<typeof MovieDetails>;
 export default meta;
 
 type Story = ComponentStoryObj<typeof MovieDetails>;
 
-export const FiftyShadesFreed: Story = {
-  args: {
-    movie,
-  },
-};
+export const FiftyShadesFreed: Story = {};

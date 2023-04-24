@@ -37,7 +37,7 @@ describe('MovieForm', () => {
     expect(screen.getByTestId('releaseDate')).toBeInTheDocument();
     expect(screen.getByTestId('posterPath')).toBeInTheDocument();
     expect(screen.getByTestId('voteAverage')).toBeInTheDocument();
-    expect(screen.getByTestId('movieGenres')).toBeInTheDocument();
+    expect(screen.getByTestId('dropdown')).toBeInTheDocument();
     expect(screen.getByTestId('runtime')).toBeInTheDocument();
     expect(screen.getByTestId('overview')).toBeInTheDocument();
     expect(screen.getByText('Reset')).toBeInTheDocument();
@@ -61,9 +61,7 @@ describe('MovieForm', () => {
     expect(screen.getByTestId('runtime')).toHaveDisplayValue(
       movie.runtime.toString()
     );
-    expect(screen.getByTestId('movieGenres')).toHaveValue(
-      movie.genres.join(', ')
-    );
+    expect(screen.getByTestId('dropdown')).toHaveValue(movie.genres.join(', '));
   });
 
   it('should call onSubmit with movie after user clicks submit', async () => {
