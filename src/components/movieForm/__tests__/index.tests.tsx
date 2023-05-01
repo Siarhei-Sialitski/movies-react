@@ -1,6 +1,6 @@
 import MovieForm from '..';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { IMovie } from '../../../shared/types';
 
 const movie: IMovie = {
@@ -71,8 +71,53 @@ describe('MovieForm', () => {
 
     expect(handleSubmitMock).toBeCalledWith({
       ...movie,
-      vote_average: movie.vote_average.toString(),
-      runtime: movie.runtime.toString(),
+    });
+  });
+
+  describe('validation', () => {
+    it('should display validation messages for required fields', async () => {
+      const { user } = setup();
+
+      await user.click(screen.getByText('Submit'));
+
+      await waitFor(() => {
+        expect(screen.getByText('Title is required')).toBeInTheDocument();
+        expect(
+          screen.getByText('Release Date is required')
+        ).toBeInTheDocument();
+        expect(screen.getByText('Poster path is required')).toBeInTheDocument();
+        expect(
+          screen.getByText('Average vote is required')
+        ).toBeInTheDocument();
+        expect(screen.getByText('Runtime is required')).toBeInTheDocument();
+        expect(screen.getByText('Overview is required')).toBeInTheDocument();
+      });
+    });
+
+    it('should display invalid format message if rating is invalid', async () => {
+      const { user } = setup();
+      await user.type(screen.getByTestId('voteAverage'), 'asd');
+
+      await user.click(screen.getByText('Submit'));
+
+      await waitFor(() =>
+        expect(
+          screen.getByText('Invalid average vote, example 7.8')
+        ).toBeInTheDocument()
+      );
+    });
+
+    it('should display invalid format message if runtime is invalid', async () => {
+      const { user } = setup();
+      await user.type(screen.getByTestId('runtime'), 'asd');
+
+      await user.click(screen.getByText('Submit'));
+
+      await waitFor(() =>
+        expect(
+          screen.getByText('Invalid runtime, example 130')
+        ).toBeInTheDocument()
+      );
     });
   });
 });

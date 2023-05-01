@@ -2,6 +2,7 @@ import React from 'react';
 import {
   LoaderFunction,
   LoaderFunctionArgs,
+  Outlet,
   useLoaderData,
 } from 'react-router-dom';
 import { getMovie } from '../../shared/api';
@@ -38,6 +39,7 @@ const MovieDetails: React.FC = () => {
           <span>{movie.overview}</span>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };

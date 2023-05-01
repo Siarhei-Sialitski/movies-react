@@ -5,7 +5,7 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     ...shorthands.gap('0px', '20px'),
-    width: '1160px',
+    ...shorthands.padding('20px'),
   },
   searchContainer: {
     display: 'flex',
@@ -18,8 +18,8 @@ const useStyles = makeStyles({
   searchIcon: {
     position: 'relative',
     top: '10px',
-    left: '1050px',
     color: '#F65261',
+    float: 'right',
   },
   contentContainer: {
     ...shorthands.padding('0px', '20px'),

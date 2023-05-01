@@ -145,6 +145,13 @@ const useStyles = makeStyles({
   expandIcon: {
     color: '#F65261',
   },
+  errorsContainer: {
+    fontFamily: 'Montserrat',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '20px',
+    color: '#F65261',
+  },
 });
 
 export default useStyles;

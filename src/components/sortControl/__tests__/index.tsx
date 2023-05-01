@@ -13,7 +13,7 @@ const setup = () => {
       currentSelection={defaultSelection}
     />
   );
-  const dropdown = screen.getByTestId('dropdown');
+  const dropdown = screen.getByTestId('sort-dropdown');
   return {
     dropdown,
     user,

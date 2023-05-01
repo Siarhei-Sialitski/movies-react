@@ -19,7 +19,7 @@ context('Movie List Page component', () => {
     });
 
     it('shoud contain ¡Three Amigos! after sort by title selected', () => {
-      cy.get('[data-testid="dropdown"]').click();
+      cy.get('[data-testid="sort-dropdown"]').click();
 
       cy.get('div').contains('Title').click();
 
@@ -28,10 +28,10 @@ context('Movie List Page component', () => {
     });
 
     it('shoud contain The Gold Rush 1925 yesr release after sort by release date selected', () => {
-      cy.get('[data-testid="dropdown"]').click();
+      cy.get('[data-testid="sort-dropdown"]').click();
 
       cy.get('div').contains('Title').click();
-      cy.get('[data-testid="dropdown"]').click();
+      cy.get('[data-testid="sort-dropdown"]').click();
       cy.get('div').contains('Release Date').click();
 
       cy.contains('The Gold Rush');

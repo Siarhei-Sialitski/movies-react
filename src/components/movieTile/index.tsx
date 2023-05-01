@@ -14,7 +14,7 @@ const MovieTile: React.FC<IMovieTileProps> = ({
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    onClick(movie.id);
+    if (movie.id) onClick(movie.id);
   };
 
   return (
@@ -25,8 +25,12 @@ const MovieTile: React.FC<IMovieTileProps> = ({
     >
       <div className={styles.menu}>
         <TileMenu
-          onEdit={() => onEdit?.(movie.id)}
-          onDelete={() => onDelete?.(movie.id)}
+          onEdit={() => {
+            if (movie.id) onEdit?.(movie.id);
+          }}
+          onDelete={() => {
+            if (movie.id) onDelete?.(movie.id);
+          }}
         />
       </div>
       <img className={styles.image} src={movie.poster_path} alt={movie.title} />

@@ -1,4 +1,5 @@
 import { allGenre, moviesApiBaseUrl } from './constants';
+import { IMovie } from './types';
 
 export const getMovie = async (movieId: string, signal: AbortSignal) => {
   const dataFetch = async () => {
@@ -56,6 +57,59 @@ export const getMovies = async (
         throw new Error('Internal Error');
       }
       return await response.json();
+    } catch (ex) {
+      const error = ex as Error;
+      if (error && error.name === 'AbortError') {
+        console.log(error.message);
+      }
+      throw new Error('Internal Error');
+    }
+  };
+
+  return await dataFetch();
+};
+
+export const createMovie = async (movie: IMovie) => {
+  const dataFetch = async () => {
+    try {
+      const response = await fetch(`${moviesApiBaseUrl}`, {
+        method: 'POST',
+        body: JSON.stringify(movie),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Internal Error');
+      }
+      return { status: 'ok' };
+    } catch (ex) {
+      const error = ex as Error;
+      if (error && error.name === 'AbortError') {
+        console.log(error.message);
+      }
+      throw new Error('Internal Error');
+    }
+  };
+
+  return await dataFetch();
+};
+
+export const updateMovie = async (movie: IMovie) => {
+  const dataFetch = async () => {
+    try {
+      console.log(movie);
+      const response = await fetch(`${moviesApiBaseUrl}`, {
+        method: 'PUT',
+        body: JSON.stringify(movie),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Internal Error');
+      }
+      return { status: 'ok' };
     } catch (ex) {
       const error = ex as Error;
       if (error && error.name === 'AbortError') {

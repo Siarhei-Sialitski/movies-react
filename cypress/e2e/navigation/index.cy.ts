@@ -62,10 +62,10 @@ context('Navigation', () => {
         const sortBy = 'Title';
         cy.visit('/');
 
-        cy.get('[data-testid="dropdown"]').click();
+        cy.get('[data-testid="sort-dropdown"]').click();
 
         cy.get('div').contains(sortBy).click();
-        cy.get('[data-testid="dropdown"]').click();
+        cy.get('[data-testid="sort-dropdown"]').click();
 
         cy.url().should('include', `?sortBy=${sortBy}`);
       });
@@ -74,10 +74,10 @@ context('Navigation', () => {
         const sortBy = 'Title';
         cy.visit('/');
 
-        cy.get('[data-testid="dropdown"]').click();
+        cy.get('[data-testid="sort-dropdown"]').click();
 
         cy.get('div').contains(sortBy).click();
-        cy.get('[data-testid="dropdown"]').click();
+        cy.get('[data-testid="sort-dropdown"]').click();
 
         cy.contains('¡Three Amigos!');
       });
@@ -129,7 +129,7 @@ context('Navigation', () => {
       cy.visit(`/?query=${query}&genre=${genre}&sortBy=title`);
 
       cy.get('input[data-testid="search-input"]').should('have.value', query);
-      cy.get('[data-testid="dropdown"]').should('have.value', 'title');
+      cy.get('[data-testid="sort-dropdown"]').should('have.value', 'title');
       cy.get('button[data-testid="activegenrebutton"').contains(genre);
       cy.get('[data-testid="movie-tile-title"]').should('contain', query);
     });

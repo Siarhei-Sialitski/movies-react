@@ -5,7 +5,7 @@ import GenreSelect from '../genreSelect';
 import MovieTile from '../movieTile';
 import SortControl from '../sortControl';
 import useStyles from './styles';
-import { Search28Regular } from '@fluentui/react-icons';
+import { Search48Regular } from '@fluentui/react-icons';
 import { Button } from '@fluentui/react-components';
 import {
   LoaderFunctionArgs,
@@ -37,7 +37,12 @@ const MovieListPage: React.FC = () => {
             } else if (+movieId !== id)
               navigate({ pathname: `${id}`, search: searchParams.toString() });
           }}
-          onEdit={() => {}}
+          onEdit={(id) => {
+            navigate({
+              pathname: `${id}/edit`,
+              search: searchParams.toString(),
+            });
+          }}
           onDelete={() => {}}
         />
       </div>
@@ -72,7 +77,7 @@ const MovieListPage: React.FC = () => {
       <div className={headerClass}>
         {movieId && (
           <Button
-            icon={<Search28Regular />}
+            icon={<Search48Regular />}
             className={styles.searchIcon}
             onClick={() => {
               navigate({ pathname: `/`, search: searchParams.toString() });
@@ -81,6 +86,7 @@ const MovieListPage: React.FC = () => {
           />
         )}
         <Outlet />
+        <div id='portal-root' />
       </div>
 
       <div className={styles.contentContainer}>

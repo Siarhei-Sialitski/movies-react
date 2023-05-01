@@ -12,12 +12,42 @@ import useStyles from './styles';
 import { IMovie, OptionOnSelectData } from '../../shared/types';
 import { TriangleDown12Filled } from '@fluentui/react-icons';
 import { genres } from '../../shared/constants';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+const schema = yup
+  .object({
+    title: yup.string().required('Title is required'),
+    vote_average: yup
+      .string()
+      .required('Average vote is required')
+      .matches(/^[1-9]\d*(\.\d+)?$/, 'Invalid average vote, example 7.8'),
+    release_date: yup.string().required('Release Date is required'),
+    poster_path: yup
+      .string()
+      .required('Poster path is required')
+      .matches(/^https?:\/\//, 'Poster path is not valid'),
+    overview: yup.string().required('Overview is required'),
+    runtime: yup
+      .string()
+      .required('Runtime is required')
+      .matches(/^\d+$/, 'Invalid runtime, example 130'),
+  })
+  .required();
+type MovieFormData = yup.InferType<typeof schema>;
 
 const MovieForm: React.FC<IMovieFormProps> = ({
   initialMovieInfo,
   onSubmit,
 }) => {
   const styles = useStyles();
+  const {
+    control,
+    formState: { errors },
+    reset,
+    handleSubmit,
+  } = useForm<MovieFormData>({ resolver: yupResolver(schema) });
   const titleInputId = useId('titleInput');
   const posterPathInputId = useId('posterPathInput');
   const releaseDateInputId = useId('releaseDateId');
@@ -26,17 +56,18 @@ const MovieForm: React.FC<IMovieFormProps> = ({
   const runtimeInputId = useId('runtimeInput');
   const overwieInputId = useId('overwieInput');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    let movie = Object.fromEntries(
-      new FormData(e.target as HTMLFormElement)
-    ) as unknown as IMovie;
-
-    movie = {
-      ...movie,
-      id: initialMovieInfo?.id ?? 0,
+  const handleFormSubmit: SubmitHandler<MovieFormData> = (movieModel) => {
+    const movie: IMovie = {
+      id: initialMovieInfo?.id ?? undefined,
+      title: movieModel.title,
+      release_date: movieModel.release_date,
+      poster_path: movieModel.poster_path,
+      runtime: +movieModel.runtime,
       genres: selectedOptions,
+      vote_average: +movieModel.vote_average,
+      overview: movieModel.overview,
     };
+
     onSubmit(movie);
   };
 
@@ -48,58 +79,99 @@ const MovieForm: React.FC<IMovieFormProps> = ({
     setSelectedOptions(data.selectedOptions);
     setValue(data.selectedOptions.join(', '));
   };
-  const [value, setValue] = React.useState(initialMovieInfo?.genres.join(', '));
+  const [value, setValue] = React.useState(
+    initialMovieInfo?.genres.join(', ') ?? ''
+  );
 
   const optionList = genres.map((option) => {
     return (
-      <Option className={styles.option} key={option}>
+      <Option
+        className={styles.option}
+        key={option}
+        value={option}
+        data-testid='movie-form-genre-option'
+      >
         {option}
       </Option>
     );
   });
 
   return (
-    <form className={styles.root} onSubmit={handleSubmit} data-testid='form'>
+    <form
+      className={styles.root}
+      onSubmit={handleSubmit(handleFormSubmit)}
+      onReset={() => {
+        setSelectedOptions(initialMovieInfo?.genres ?? []);
+        setValue(initialMovieInfo?.genres.join(', ') ?? '');
+
+        reset();
+      }}
+      data-testid='form'
+    >
       <div className={styles.wrapper}>
         <div className={styles.leftColumn}>
           <Label htmlFor={titleInputId}>title</Label>
-          <Input
-            id={titleInputId}
+          <Controller
             name='title'
-            defaultValue={initialMovieInfo?.title}
-            placeholder='Movie title'
-            data-testid='movieTitle'
+            control={control}
+            defaultValue={initialMovieInfo?.title ?? ''}
+            render={({ field }) => (
+              <Input
+                id={titleInputId}
+                {...field}
+                placeholder='Movie title'
+                data-testid='movieTitle'
+              />
+            )}
           />
         </div>
         <div className={styles.rightColumn}>
           <Label htmlFor={releaseDateInputId}>release date</Label>
-          <Input
-            id={releaseDateInputId}
+          <Controller
             name='release_date'
-            value={initialMovieInfo?.release_date}
-            placeholder='Select date'
-            type='date'
-            data-testid='releaseDate'
+            control={control}
+            defaultValue={initialMovieInfo?.release_date ?? ''}
+            render={({ field }) => (
+              <Input
+                id={releaseDateInputId}
+                {...field}
+                placeholder='Select date'
+                type='date'
+                data-testid='releaseDate'
+              />
+            )}
           />
         </div>
         <div className={styles.leftColumn}>
           <Label htmlFor={posterPathInputId}>movie url</Label>
-          <Input
-            id={posterPathInputId}
+          <Controller
             name='poster_path'
-            defaultValue={initialMovieInfo?.poster_path}
-            placeholder='https://'
-            data-testid='posterPath'
+            control={control}
+            defaultValue={initialMovieInfo?.poster_path ?? ''}
+            render={({ field }) => (
+              <Input
+                id={posterPathInputId}
+                {...field}
+                placeholder='https://'
+                data-testid='posterPath'
+              />
+            )}
           />
         </div>
         <div className={styles.rightColumn}>
           <Label htmlFor={voteAverageInputId}>rating</Label>
-          <Input
-            id={voteAverageInputId}
+          <Controller
             name='vote_average'
-            defaultValue={`${initialMovieInfo?.vote_average ?? ''}`}
-            placeholder='7.8'
-            data-testid='voteAverage'
+            control={control}
+            defaultValue={initialMovieInfo?.vote_average.toString() ?? ''}
+            render={({ field }) => (
+              <Input
+                id={voteAverageInputId}
+                {...field}
+                placeholder='7.8'
+                data-testid='voteAverage'
+              />
+            )}
           />
         </div>
         <div className={styles.leftColumn}>
@@ -112,33 +184,57 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             data-testid='dropdown'
             onOptionSelect={handleOptionSelect}
             multiselect={true}
+            defaultSelectedOptions={initialMovieInfo?.genres ?? []}
             selectedOptions={selectedOptions}
-            value={value}
             placeholder='Select genres'
+            name='genres'
+            defaultValue={value}
+            value={value}
           >
             {optionList}
           </Dropdown>
         </div>
         <div className={styles.rightColumn}>
           <Label htmlFor={runtimeInputId}>runtime</Label>
-          <Input
-            id={runtimeInputId}
+          <Controller
             name='runtime'
-            defaultValue={`${initialMovieInfo?.runtime ?? ''}`}
-            placeholder='minutes'
-            data-testid='runtime'
+            control={control}
+            defaultValue={initialMovieInfo?.runtime.toString() ?? ''}
+            render={({ field }) => (
+              <Input
+                id={runtimeInputId}
+                {...field}
+                placeholder='minutes'
+                data-testid='runtime'
+              />
+            )}
           />
         </div>
         <div className={styles.fullColumn}>
           <Label htmlFor={overwieInputId}>overview</Label>
-          <Textarea
-            placeholder='Movie description'
-            appearance='outline'
-            id={overwieInputId}
+          <Controller
             name='overview'
-            defaultValue={initialMovieInfo?.overview}
-            data-testid='overview'
+            control={control}
+            defaultValue={initialMovieInfo?.overview ?? ''}
+            render={({ field }) => (
+              <Textarea
+                placeholder='Movie description'
+                appearance='outline'
+                id={overwieInputId}
+                {...field}
+                data-testid='overview'
+              />
+            )}
           />
+
+          <div className={styles.errorsContainer}>
+            <p role='alert'>{errors.title?.message}</p>
+            <p role='alert'>{errors.release_date?.message}</p>
+            <p role='alert'>{errors.poster_path?.message}</p>
+            <p role='alert'>{errors.vote_average?.message}</p>
+            <p role='alert'>{errors.runtime?.message}</p>
+            <p role='alert'>{errors.overview?.message}</p>
+          </div>
         </div>
       </div>
       <div className={styles.footer}>
