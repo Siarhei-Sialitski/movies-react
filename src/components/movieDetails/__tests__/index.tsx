@@ -21,16 +21,12 @@ const movie: IMovie = {
   runtime: 106,
 };
 
-const loaderReponse = {
-  movie,
-};
-
 const setup = () => {
   const routes = [
     {
       path: '/:movieId',
       element: <MovieDetails />,
-      loader: () => loaderReponse,
+      loader: () => movie,
     },
   ];
 

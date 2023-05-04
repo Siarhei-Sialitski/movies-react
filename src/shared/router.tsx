@@ -13,22 +13,24 @@ import SearchForm from '../components/searchForm';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
-      path='/*'
+      path='/'
       element={<MovieListPage />}
       loader={moviesLoader}
       errorElement={<ErrorPage />}
+      shouldRevalidate={() => true}
     >
-      <Route path='' element={<SearchForm />} errorElement={<ErrorPage />}>
-        <Route path='new' element={<AddMovieForm />} />
-      </Route>
-      <Route
-        path=':movieId'
-        element={<MovieDetails />}
-        loader={movieLoader}
-        errorElement={<ErrorPage />}
-        shouldRevalidate={() => true}
-      >
-        <Route path='edit' element={<EditMovieForm />} loader={movieLoader} />
+      <Route errorElement={<ErrorPage />}>
+        <Route path='' element={<SearchForm />}>
+          <Route path='new' element={<AddMovieForm />} />
+        </Route>
+        <Route
+          path=':movieId'
+          element={<MovieDetails />}
+          loader={movieLoader}
+          shouldRevalidate={() => true}
+        >
+          <Route path='edit' element={<EditMovieForm />} loader={movieLoader} />
+        </Route>
       </Route>
     </Route>
   )

@@ -26,8 +26,12 @@ context('Create Movie', () => {
         'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg'
       );
       cy.get('input[data-testid="voteAverage"]').type('8');
-      cy.get('[data-testid="dropdown"]').click();
-      cy.get('[data-testid="movie-form-genre-option"]').last().click();
+      cy.get('.react-select__control')
+        .click()
+        .get('.react-select__menu') // find opened dropdown
+        .find('.react-select__option') // find all options
+        .first()
+        .click();
       cy.get('input[data-testid="runtime"]').type('120');
       cy.get('[data-testid="overview"]').type('Movie overview');
 

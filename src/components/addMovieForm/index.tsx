@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { createMovie } from '../../shared/api';
 import Dialog from '../dialog';
 import MovieForm from '../movieForm';
@@ -7,6 +7,7 @@ import MovieForm from '../movieForm';
 const AddMovieForm: React.FC = () => {
   const [showDialog, setShowDialog] = useState(true);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   return (
     <div>
@@ -16,14 +17,21 @@ const AddMovieForm: React.FC = () => {
           title='Add Movie'
           onClose={() => {
             setShowDialog(false);
-            navigate(-1);
+            navigate({ pathname: '/', search: searchParams.toString() });
           }}
         >
           <MovieForm
             onSubmit={async (movie) => {
-              setShowDialog(false);
-              await createMovie(movie);
-              navigate(-1);
+              try {
+                const createdMovie = await createMovie(movie);
+                navigate({
+                  pathname: `/${createdMovie.id}`,
+                  search: searchParams.toString(),
+                });
+                setShowDialog(false);
+              } catch (error) {
+                console.log((error as Error)?.message);
+              }
             }}
           />
         </Dialog>

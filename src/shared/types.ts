@@ -14,3 +14,12 @@ export type OptionOnSelectData = {
   optionText: string | undefined;
   selectedOptions: string[];
 };
+
+export interface IGetMoviesResponse {
+  data: IMovie[];
+}
+
+export interface IOption {
+  label: string;
+  value: string;
+}

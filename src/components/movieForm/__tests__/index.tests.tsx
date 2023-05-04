@@ -37,14 +37,14 @@ describe('MovieForm', () => {
     expect(screen.getByTestId('releaseDate')).toBeInTheDocument();
     expect(screen.getByTestId('posterPath')).toBeInTheDocument();
     expect(screen.getByTestId('voteAverage')).toBeInTheDocument();
-    expect(screen.getByTestId('dropdown')).toBeInTheDocument();
+    expect(screen.getByText('Select...')).toBeInTheDocument();
     expect(screen.getByTestId('runtime')).toBeInTheDocument();
     expect(screen.getByTestId('overview')).toBeInTheDocument();
     expect(screen.getByText('Reset')).toBeInTheDocument();
     expect(screen.getByText('Submit')).toBeInTheDocument();
   });
 
-  it('should render movie data if passes', () => {
+  it('should render movie data if passed', () => {
     setup(movie);
 
     expect(screen.getByTestId('movieTitle')).toHaveDisplayValue(movie.title);
@@ -61,63 +61,62 @@ describe('MovieForm', () => {
     expect(screen.getByTestId('runtime')).toHaveDisplayValue(
       movie.runtime.toString()
     );
-    expect(screen.getByTestId('dropdown')).toHaveValue(movie.genres.join(', '));
+    movie.genres.map((g) => expect(screen.getByText(g)).toBeInTheDocument());
   });
+});
 
-  it('should call onSubmit with movie after user clicks submit', async () => {
-    const { user } = setup(movie);
+it('should call onSubmit with movie after user clicks submit', async () => {
+  const { user } = setup(movie);
+
+  await user.click(screen.getByText('Submit'));
+
+  expect(handleSubmitMock).toBeCalledWith({
+    ...movie,
+  });
+});
+
+describe('validation', () => {
+  it('should display validation messages for required fields', async () => {
+    const { user } = setup();
 
     await user.click(screen.getByText('Submit'));
 
-    expect(handleSubmitMock).toBeCalledWith({
-      ...movie,
+    await waitFor(() => {
+      expect(screen.getByText('Title is required')).toBeInTheDocument();
+      expect(screen.getByText('Release Date is required')).toBeInTheDocument();
+      expect(screen.getByText('Poster path is required')).toBeInTheDocument();
+      expect(screen.getByText('Rating is required')).toBeInTheDocument();
+      expect(screen.getByText('Runtime is required')).toBeInTheDocument();
+      expect(screen.getByText('Overview is required')).toBeInTheDocument();
+      expect(
+        screen.getByText('At least one genre should be selected')
+      ).toBeInTheDocument();
     });
   });
 
-  describe('validation', () => {
-    it('should display validation messages for required fields', async () => {
-      const { user } = setup();
+  it('should display invalid format message if rating is greater than 100', async () => {
+    const { user } = setup();
+    await user.type(screen.getByTestId('voteAverage'), '101');
 
-      await user.click(screen.getByText('Submit'));
+    await user.click(screen.getByText('Submit'));
 
-      await waitFor(() => {
-        expect(screen.getByText('Title is required')).toBeInTheDocument();
-        expect(
-          screen.getByText('Release Date is required')
-        ).toBeInTheDocument();
-        expect(screen.getByText('Poster path is required')).toBeInTheDocument();
-        expect(
-          screen.getByText('Average vote is required')
-        ).toBeInTheDocument();
-        expect(screen.getByText('Runtime is required')).toBeInTheDocument();
-        expect(screen.getByText('Overview is required')).toBeInTheDocument();
-      });
-    });
+    await waitFor(() =>
+      expect(
+        screen.getByText('Rating must be between 0 and 100')
+      ).toBeInTheDocument()
+    );
+  });
 
-    it('should display invalid format message if rating is invalid', async () => {
-      const { user } = setup();
-      await user.type(screen.getByTestId('voteAverage'), 'asd');
+  it('should display invalid format message if rating is greater than 100', async () => {
+    const { user } = setup();
+    await user.type(screen.getByTestId('voteAverage'), '-1');
 
-      await user.click(screen.getByText('Submit'));
+    await user.click(screen.getByText('Submit'));
 
-      await waitFor(() =>
-        expect(
-          screen.getByText('Invalid average vote, example 7.8')
-        ).toBeInTheDocument()
-      );
-    });
-
-    it('should display invalid format message if runtime is invalid', async () => {
-      const { user } = setup();
-      await user.type(screen.getByTestId('runtime'), 'asd');
-
-      await user.click(screen.getByText('Submit'));
-
-      await waitFor(() =>
-        expect(
-          screen.getByText('Invalid runtime, example 130')
-        ).toBeInTheDocument()
-      );
-    });
+    await waitFor(() =>
+      expect(
+        screen.getByText('Rating must be between 0 and 100')
+      ).toBeInTheDocument()
+    );
   });
 });

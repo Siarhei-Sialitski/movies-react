@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { GenreSelectProps } from "./types";
 import React from 'react';
 import useStyles from './styles';
+import { allGenre } from '../../shared/constants';
 
 const GenreSelect: React.FC<GenreSelectProps> = ({
   genreNames,
@@ -10,7 +11,8 @@ const GenreSelect: React.FC<GenreSelectProps> = ({
 }) => {
   const styles = useStyles();
 
-  const genreItems = genreNames.map((genre) => {
+  const genres = [allGenre, ...genreNames];
+  const genreItems = genres.map((genre) => {
     const isSelected = genre === selectedGenre;
     const btnClass = classNames(styles.genreButton, {
       [styles.genreButtonSelected]: isSelected,

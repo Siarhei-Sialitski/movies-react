@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import GenreSelect from "../index";
 import userEvent from '@testing-library/user-event';
+import { genres } from '../../../shared/constants';
 
-const genres = ["All", "Documentary", "Comedy", "Horror", "Crime"];
 const selectedGenre = genres[0];
 const handleSelectMock = jest.fn();
 const setup = () => {
@@ -14,7 +14,7 @@ const setup = () => {
       onSelect={handleSelectMock}
     />
   );
-  const buttons = screen.getAllByRole("button");
+  const buttons = screen.getAllByRole('button');
   return {
     buttons,
     user,
@@ -22,11 +22,11 @@ const setup = () => {
   };
 };
 
-describe("Genre Select", () => {
-  it("Component renders all genres passed in props", () => {
+describe('Genre Select', () => {
+  it('Component renders all genres passed in props +All', () => {
     const { buttons } = setup();
 
-    expect(buttons).toHaveLength(genres.length);
+    expect(buttons).toHaveLength(genres.length + 1);
   });
 
   it('After a click event on a genre button component calls "onChange" callback and passes correct genre in arguments', async () => {

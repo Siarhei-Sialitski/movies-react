@@ -1,16 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate, useSearchParams } from 'react-router-dom';
 import { updateMovie } from '../../shared/api';
+import { IMovie } from '../../shared/types';
 import Dialog from '../dialog';
-import { IMovieLoaderData } from '../movieDetails/types';
 import MovieForm from '../movieForm';
 
 const EditMovieForm: React.FC = () => {
-  const { movie } = useLoaderData() as IMovieLoaderData;
+  const movie = useLoaderData() as IMovie;
 
   const [showDialog, setShowDialog] = useState(true);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   return (
     <div>
@@ -19,15 +20,25 @@ const EditMovieForm: React.FC = () => {
           title='Edit Movie'
           onClose={() => {
             setShowDialog(false);
-            navigate(-1);
+            navigate({
+              pathname: `/${movie.id}`,
+              search: searchParams.toString(),
+            });
           }}
         >
           <MovieForm
             initialMovieInfo={movie}
             onSubmit={async (movie) => {
-              setShowDialog(false);
-              await updateMovie(movie);
-              navigate(-1);
+              try {
+                const editedMovie = await updateMovie(movie);
+                setShowDialog(false);
+                navigate({
+                  pathname: `/${editedMovie.id}`,
+                  search: searchParams.toString(),
+                });
+              } catch (error) {
+                console.log((error as Error)?.message);
+              }
             }}
           />
         </Dialog>
