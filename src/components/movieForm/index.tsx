@@ -102,11 +102,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
       onSubmit={handleSubmit(handleFormSubmit)}
       onReset={(e) => {
         e.preventDefault();
-        reset({
-          ...defaultValue,
-          vote_average: defaultValue.vote_average ?? 0,
-          runtime: defaultValue.runtime ?? 0,
-        });
+        reset();
       }}
       data-testid='form'
     >
