@@ -1,5 +1,5 @@
 export interface IMovie {
-  id: number;
+  id: number | undefined;
   title: string;
   vote_average: number;
   release_date: string;
@@ -14,3 +14,12 @@ export type OptionOnSelectData = {
   optionText: string | undefined;
   selectedOptions: string[];
 };
+
+export interface IGetMoviesResponse {
+  data: IMovie[];
+}
+
+export interface IOption {
+  label: string;
+  value: string;
+}

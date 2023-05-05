@@ -2,16 +2,17 @@ import React from 'react';
 import {
   LoaderFunction,
   LoaderFunctionArgs,
+  Outlet,
   useLoaderData,
 } from 'react-router-dom';
 import { getMovie } from '../../shared/api';
+import { IMovie } from '../../shared/types';
 import { minutesToHMText } from '../../utils/dateTimeUtils';
 import MovieGenres from '../movieGenres';
 import useStyles from './styles';
-import { IMovieLoaderData } from './types';
 
 const MovieDetails: React.FC = () => {
-  const { movie } = useLoaderData() as IMovieLoaderData;
+  const movie = useLoaderData() as IMovie;
   const styles = useStyles();
 
   return (
@@ -38,6 +39,7 @@ const MovieDetails: React.FC = () => {
           <span>{movie.overview}</span>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };

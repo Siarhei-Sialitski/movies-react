@@ -18,18 +18,20 @@ const Dialog: React.FC<IDialogProps> = ({ title, children, onClose }) => {
             allowOutsideClick: true,
           }}
         >
-          <div className={styles.container}>
-            <div className={styles.header}>
-              <Button
-                data-testid='dismissButton'
-                tabIndex={100}
-                className={styles.dismissButton}
-                onClick={onClose}
-                icon={<Dismiss20Regular />}
-              ></Button>
+          <div className={styles.modal}>
+            <div className={styles.container}>
+              <div className={styles.header}>
+                <Button
+                  data-testid='dismissButton'
+                  tabIndex={100}
+                  className={styles.dismissButton}
+                  onClick={onClose}
+                  icon={<Dismiss20Regular />}
+                ></Button>
+              </div>
+              <div className={styles.headerTitle}>{title}</div>
+              <div className={styles.body}>{children}</div>
             </div>
-            <div className={styles.headerTitle}>{title}</div>
-            <div className={styles.body}>{children}</div>
           </div>
         </FocusTrap>,
         document.body

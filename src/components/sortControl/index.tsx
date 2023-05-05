@@ -38,7 +38,7 @@ const SortControl: React.FC<ISortControlProps> = ({
         expandIcon={<TriangleDown12Filled className={styles.expandIcon} />}
         selectedOptions={[currentSelection]}
         onOptionSelect={handleOptionSelect}
-        data-testid='dropdown'
+        data-testid='sort-dropdown'
       >
         {optionList}
       </Dropdown>

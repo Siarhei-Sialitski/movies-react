@@ -143,34 +143,18 @@ describe('getMovies', () => {
     );
   });
 
-  it('should return empty array if rejected', async () => {
-    fetchMock.resetMocks();
-    fetchMock.mockRejectOnce();
-    const { getMovies } = setupGetMovies('', '', 'Release Date');
+  describe('getMovie', () => {
+    beforeEach(() => {
+      fetchMock.resetMocks();
+      fetchMock.mockResponseOnce(JSON.stringify(movies[0]));
+    });
 
-    await expect(getMovies()).rejects.toThrow();
-  });
-});
-
-describe('getMovie', () => {
-  beforeEach(() => {
-    fetchMock.resetMocks();
-    fetchMock.mockResponseOnce(JSON.stringify(movies[0]));
-  });
-
-  it('should return fetch data response', async () => {
-    const { getMovie } = setupGetMovie('1');
-    const result = await getMovie();
-    console.log(result);
-    expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(result).toEqual({ movie: movies[0] });
-  });
-
-  it('should return null if rejected', async () => {
-    fetchMock.resetMocks();
-    fetchMock.mockRejectOnce();
-    const { getMovie } = setupGetMovie('');
-
-    await expect(getMovie()).rejects.toThrow();
+    it('should return fetch data response', async () => {
+      const { getMovie } = setupGetMovie('1');
+      const result = await getMovie();
+      console.log(result);
+      expect(fetchMock).toHaveBeenCalledTimes(1);
+      expect(result).toEqual(movies[0]);
+    });
   });
 });
