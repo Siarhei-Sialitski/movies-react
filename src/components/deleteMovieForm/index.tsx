@@ -1,16 +1,14 @@
 import { IDeleteMovieFormProps } from './types';
 import React from 'react';
-import useStyles from './styles';
 
 const DeleteMovieForm: React.FC<IDeleteMovieFormProps> = ({ onConfirm }) => {
-  const styles = useStyles();
   return (
-    <div className={styles.root}>
-      <span className={styles.message}>
+    <div className='flex-col'>
+      <span className='text-white text-xl'>
         Are you sure you want to delete this movie?
       </span>
       <input
-        className={styles.button}
+        className='bg-rose-500 w-44 h-14 rounded'
         type='submit'
         value='Confirm'
         onClick={onConfirm}

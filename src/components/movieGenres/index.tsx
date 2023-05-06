@@ -1,10 +1,7 @@
 import React from 'react';
 import { MovieGenresProps } from './types';
-import useStyles from './styles';
 
 const MovieGenres: React.FC<MovieGenresProps> = ({ genres }) => {
-  const styles = useStyles();
-
   const genresList = genres.map((genre, i) => (
     <span key={genre}>
       {genre}
@@ -13,7 +10,10 @@ const MovieGenres: React.FC<MovieGenresProps> = ({ genres }) => {
   ));
 
   return (
-    <div className={styles.genres} data-testid='moviegenres'>
+    <div
+      className='text-white text-sm w-80 h-4 leading-4'
+      data-testid='moviegenres'
+    >
       {genresList}
     </div>
   );

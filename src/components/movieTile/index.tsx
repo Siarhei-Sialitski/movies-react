@@ -1,7 +1,6 @@
 import { IMovieTileProps } from './types';
 import React from 'react';
 import MovieGenres from '../movieGenres';
-import useStyles from './styles';
 import TileMenu from '../tileMenu';
 
 const MovieTile: React.FC<IMovieTileProps> = ({
@@ -10,8 +9,6 @@ const MovieTile: React.FC<IMovieTileProps> = ({
   onEdit,
   onDelete,
 }) => {
-  const styles = useStyles();
-
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     if (movie.id) onClick(movie.id);
@@ -21,9 +18,9 @@ const MovieTile: React.FC<IMovieTileProps> = ({
     <div
       onClick={handleClick}
       data-testid='movietilerootcontainer'
-      className={styles.rootContainer}
+      className='w-80'
     >
-      <div className={styles.menu}>
+      <div className='relative top-14 left-64'>
         <TileMenu
           onEdit={() => {
             if (movie.id) onEdit?.(movie.id);
@@ -33,19 +30,26 @@ const MovieTile: React.FC<IMovieTileProps> = ({
           }}
         />
       </div>
-      <img className={styles.image} src={movie.poster_path} alt={movie.title} />
-      <div className={styles.tileContainer}>
-        <div className={styles.divTileMovieName}>
-          <span className={styles.tileMovieName} data-testid='movie-tile-title'>
+      <img
+        className='w-80 h-[32rem] float-left z-0'
+        src={movie.poster_path}
+        alt={movie.title}
+      />
+      <div className='relative top-2.5 w-80'>
+        <div className='float-left'>
+          <span
+            className='w-56 h-5 text-lg text-white opacity-70 mix-blend-normal'
+            data-testid='movie-tile-title'
+          >
             {movie.title}
           </span>
         </div>
-        <div className={styles.divTileReleaseYear}>
-          <span className={styles.spanTileReleaseYear}>
+        <div className='box-border w-16 h-6 mix-blend-normal opacity-50 float-right text-center flex items-center justify-center rounded border border-solid border-gray-300'>
+          <span className='text-white opacity-70 mix-blend-normal text-center font-sm w-12 h-4 leading-4'>
             {movie.release_date.slice(0, 4)}
           </span>
         </div>
-        <div className={styles.genres}>
+        <div className='float-left'>
           <MovieGenres genres={movie.genres} />
         </div>
       </div>

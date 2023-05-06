@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useStyles from './styles';
 import { useSearchParams } from 'react-router-dom';
 
 const Search: React.FC = () => {
@@ -14,8 +13,6 @@ const Search: React.FC = () => {
     }
   };
 
-  const styles = useStyles();
-
   const handleSearch = () => {
     if (searchParams.get('query') !== searchValue) {
       searchValue
@@ -26,9 +23,9 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className={styles.root} data-testid='search'>
+    <div className='flex gap-10 w-[48rem]' data-testid='search'>
       <input
-        className={styles.searchInput}
+        className='w-full h-14 bg-gray-700 opacity-80 rounded text-xl text-neutral-300 pl-5 placeholder:opacity-50'
         value={searchValue}
         onChange={(e) => {
           setSearchValue(e.target.value);
@@ -38,7 +35,7 @@ const Search: React.FC = () => {
         data-testid='search-input'
       />
       <button
-        className={styles.searchButton}
+        className='rounded bg-rose-500 w-60 font-montserrat text-neutral-300 uppercase text-xl opacity-80'
         onClick={handleSearch}
         data-testid='search-button'
       >

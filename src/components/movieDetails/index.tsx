@@ -9,33 +9,41 @@ import { getMovie } from '../../shared/api';
 import { IMovie } from '../../shared/types';
 import { minutesToHMText } from '../../utils/dateTimeUtils';
 import MovieGenres from '../movieGenres';
-import useStyles from './styles';
 
 const MovieDetails: React.FC = () => {
   const movie = useLoaderData() as IMovie;
-  const styles = useStyles();
 
   return (
-    <div className={styles.container} data-testid='moviedetailsrootcontainer'>
-      <img className={styles.image} src={movie.poster_path} alt={movie.title} />
-      <div className={styles.content}>
-        <div className={styles.movieName}>
-          <span className={styles.movieName} data-testid='moviedetails-title'>
-            {movie.title}
+    <div
+      className='w-[64rem] flex gap-x-6 text-xl'
+      data-testid='moviedetailsrootcontainer'
+    >
+      <img
+        className='w-80 h-[30rem]'
+        src={movie.poster_path}
+        alt={movie.title}
+      />
+      <div className='flex flex-wrap'>
+        <span
+          className='h-12 text-4xl text-center uppercase text-white whitespace-nowrap'
+          data-testid='moviedetails-title'
+        >
+          {movie.title}
+        </span>
+        <div className='h-12 w-12 relative left-20 items-center justify-center rounded-full border border-solid border-white'>
+          <span className='absolute h-3 inset-x-px top-2 text-center uppercase text-white'>
+            {movie.vote_average}
           </span>
         </div>
-        <div className={styles.rating}>
-          <span className={styles.detailsRating}>{movie.vote_average}</span>
-        </div>
-        <div className={styles.movieGenresContainer}>
+        <div className='basis-full'>
           <MovieGenres genres={movie.genres} />
         </div>
-        <div className={styles.detailsYearAndTime}>
+        <div className='basis-full flex w-80 gap-x-24 text-2xl text-rose-500'>
           <span>{movie.release_date.slice(0, 4)}</span>
 
           <span>{minutesToHMText(movie.runtime)}</span>
         </div>
-        <div className={styles.detailsDescription}>
+        <div className='text-white opacity-50 h-72 w-[40rem]'>
           <span>{movie.overview}</span>
         </div>
       </div>

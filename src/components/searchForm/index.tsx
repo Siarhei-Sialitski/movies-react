@@ -1,17 +1,14 @@
 import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
 import Search from '../search';
-import useStyles from './styles';
 
 const SearchForm: React.FC = () => {
-  const styles = useStyles();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
   return (
-    <>
-      <Search />
+    <div className='flex content-center'>
+      {' '}
       <button
-        className={styles.addMovieButton}
+        className='w-60 absolute top-10 right-10 opacity-60 bg-gray-400 h-14 rounded uppercase'
         onClick={() =>
           navigate({ pathname: 'new', search: searchParams.toString() })
         }
@@ -19,8 +16,9 @@ const SearchForm: React.FC = () => {
       >
         + add movie
       </button>
+      <Search />
       <Outlet />
-    </>
+    </div>
   );
 };
 

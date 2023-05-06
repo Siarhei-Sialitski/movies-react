@@ -1,8 +1,6 @@
 import { IMovieFormProps } from './types';
-import React from 'react';
-import { Label, useId } from '@fluentui/react-components';
+import React, { useId } from 'react';
 import Select from 'react-select';
-import useStyles from './styles';
 import { IMovie, IOption } from '../../shared/types';
 import { genres } from '../../shared/constants';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -46,7 +44,6 @@ const MovieForm: React.FC<IMovieFormProps> = ({
   initialMovieInfo,
   onSubmit,
 }) => {
-  const styles = useStyles();
   const defaultValue = {
     title: initialMovieInfo?.title ?? '',
     release_date: initialMovieInfo?.release_date ?? '',
@@ -59,7 +56,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
     vote_average: initialMovieInfo?.vote_average,
     overview: initialMovieInfo?.overview,
   };
-  console.log(defaultValue);
+
   const {
     control,
     register,
@@ -70,13 +67,13 @@ const MovieForm: React.FC<IMovieFormProps> = ({
     resolver: yupResolver(schema),
     defaultValues: defaultValue,
   });
-  const titleInputId = useId('titleInput');
-  const posterPathInputId = useId('posterPathInput');
-  const releaseDateInputId = useId('releaseDateId');
-  const voteAverageInputId = useId('voteAverageInput');
-  const genreInputId = useId('genreInput');
-  const runtimeInputId = useId('runtimeInput');
-  const overwieInputId = useId('overwieInput');
+  const titleInputId = useId();
+  const posterPathInputId = useId();
+  const releaseDateInputId = useId();
+  const voteAverageInputId = useId();
+  const genreInputId = useId();
+  const runtimeInputId = useId();
+  const overwieInputId = useId();
   const options = genres.map((g) => {
     return { value: g, label: g };
   });
@@ -98,7 +95,7 @@ const MovieForm: React.FC<IMovieFormProps> = ({
 
   return (
     <form
-      className={styles.root}
+      className='gap-1 max-w-2xl p-1 h-[24rem]'
       onSubmit={handleSubmit(handleFormSubmit)}
       onReset={(e) => {
         e.preventDefault();
@@ -106,36 +103,59 @@ const MovieForm: React.FC<IMovieFormProps> = ({
       }}
       data-testid='form'
     >
-      <div className={styles.wrapper}>
-        <div className={styles.leftColumn}>
-          <Label htmlFor={titleInputId}>title</Label>
+      <div className='grid grid-cols-[350px_260px] gap-5'>
+        <div className='col-start-1 col-end-1 flex flex-col gap-0.5'>
+          <label
+            htmlFor={titleInputId}
+            className='opacity-80 text-base uppercase text-rose-500 font-semibold'
+          >
+            title
+          </label>
           <input
             id={titleInputId}
             {...register('title')}
             placeholder='Movie title'
             data-testid='movieTitle'
+            className='rounded opacity-80 mix-blend-normal text-black text-base font-normal placeholder:opacity-50'
           />
         </div>
-        <div className={styles.rightColumn}>
-          <Label htmlFor={releaseDateInputId}>release date</Label>
+        <div className='col-start-2 col-end-2 flex flex-col gap-0.5'>
+          <label
+            htmlFor={releaseDateInputId}
+            className='opacity-80 text-base uppercase text-rose-500 font-semibold'
+          >
+            release date
+          </label>
           <input
             id={releaseDateInputId}
             {...register('release_date')}
             type='date'
             data-testid='releaseDate'
+            className='rounded opacity-80 mix-blend-normal text-black text-base font-normal placeholder:opacity-50'
           />
         </div>
-        <div className={styles.leftColumn}>
-          <Label htmlFor={posterPathInputId}>movie url</Label>
+        <div className='col-start-1 col-end-1 flex flex-col gap-0.5'>
+          <label
+            htmlFor={posterPathInputId}
+            className='opacity-80 text-base uppercase text-rose-500 font-semibold'
+          >
+            movie url
+          </label>
           <input
             id={posterPathInputId}
             {...register('poster_path')}
             placeholder='https://'
             data-testid='posterPath'
+            className='rounded opacity-80 mix-blend-normal text-black text-base font-normal placeholder:opacity-50'
           />
         </div>
-        <div className={styles.rightColumn}>
-          <Label htmlFor={voteAverageInputId}>rating</Label>
+        <div className='col-start-2 col-end-2 flex flex-col gap-0.5'>
+          <label
+            htmlFor={voteAverageInputId}
+            className='opacity-80 text-base uppercase text-rose-500 font-semibold'
+          >
+            rating
+          </label>
           <input
             {...register('vote_average', { valueAsNumber: true })}
             id={voteAverageInputId}
@@ -143,10 +163,16 @@ const MovieForm: React.FC<IMovieFormProps> = ({
             data-testid='voteAverage'
             type='number'
             step='0.1'
+            className='rounded opacity-80 mix-blend-normal text-black text-base font-normal placeholder:opacity-50'
           />
         </div>
-        <div className={styles.leftColumn}>
-          <Label htmlFor={genreInputId}>genre</Label>
+        <div className='col-start-1 col-end-1 flex flex-col gap-0.5'>
+          <label
+            htmlFor={genreInputId}
+            className='opacity-80 text-base uppercase text-rose-500 font-semibold'
+          >
+            genre
+          </label>
           <Controller
             name='genres'
             control={control}
@@ -160,43 +186,42 @@ const MovieForm: React.FC<IMovieFormProps> = ({
                 getOptionLabel={(option) => option.value}
                 getOptionValue={(option) => option.value}
                 isMulti={true}
-                styles={{
-                  control: (base) => ({
-                    ...base,
-                    background: 'rgba(50, 50, 50, 0.948044)',
-                  }),
-                  option: (base, { isFocused }) => ({
-                    ...base,
-                    background: isFocused
-                      ? 'gray'
-                      : 'rgba(50, 50, 50, 0.948044)',
-                  }),
-                }}
                 {...field}
               />
             )}
           />
         </div>
-        <div className={styles.rightColumn}>
-          <Label htmlFor={runtimeInputId}>runtime</Label>
+        <div className='col-start-2 col-end-2 flex flex-col gap-0.5'>
+          <label
+            htmlFor={runtimeInputId}
+            className='opacity-80 text-base uppercase text-rose-500 font-semibold'
+          >
+            runtime
+          </label>
           <input
             id={runtimeInputId}
             {...register('runtime', { valueAsNumber: true })}
             placeholder='minutes'
             data-testid='runtime'
             type='number'
+            className='rounded opacity-80 mix-blend-normal text-black text-base font-normal placeholder:opacity-50'
           />
         </div>
-        <div className={styles.fullColumn}>
-          <Label htmlFor={overwieInputId}>overview</Label>
+        <div className='col-start-1 col-end-3 flex flex-col gap-0.5'>
+          <label
+            htmlFor={overwieInputId}
+            className='opacity-80 text-base uppercase text-rose-500 font-semibold'
+          >
+            overview
+          </label>
           <textarea
             placeholder='Movie description'
             id={overwieInputId}
             {...register('overview')}
             data-testid='overview'
+            className='rounded opacity-80 placeholder:opacity-50 mix-blend-normal text-black text-base'
           />
-
-          <div className={styles.errorsContainer}>
+          <div className='text-base text-rose-500'>
             <p role='alert'>{errors.title?.message}</p>
             <p role='alert'>{errors.release_date?.message}</p>
             <p role='alert'>{errors.poster_path?.message}</p>
@@ -207,10 +232,18 @@ const MovieForm: React.FC<IMovieFormProps> = ({
           </div>
         </div>
       </div>
-      <div className={styles.footer}>
-        <div className={styles.footerButtons}>
-          <input className={styles.reset} type='reset' value='Reset' />
-          <input className={styles.submit} type='submit' value='Submit' />
+      <div className='py-4 px-2'>
+        <div className='float-right w-96 space-x-8'>
+          <input
+            className='text-rose-500 bg-neutral-800 rounded text-base w-44 h-12'
+            type='reset'
+            value='Reset'
+          />
+          <input
+            className='text-white w-44 h-12 text-base rounded bg-rose-500'
+            type='submit'
+            value='Submit'
+          />
         </div>
       </div>
     </form>
