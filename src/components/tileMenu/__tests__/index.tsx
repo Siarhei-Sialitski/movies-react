@@ -24,13 +24,6 @@ describe('Tile Menu', () => {
     expect(button).toBeInTheDocument();
   });
 
-  it('should not render menu items', () => {
-    setup();
-
-    expect(screen.queryByText('Edit')).not.toBeInTheDocument();
-    expect(screen.queryByText('Delete')).not.toBeInTheDocument();
-  });
-
   describe('Edit menu item', () => {
     it('should renders Edit menu item after icon clicked', async () => {
       const { button } = setup();

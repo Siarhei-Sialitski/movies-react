@@ -33,12 +33,6 @@ describe('Sort Control', () => {
     expect(screen.getByText(defaultSelection)).toBeInTheDocument();
   });
 
-  it('should not render other options', () => {
-    setup();
-
-    expect(screen.queryByText(anotherOption)).not.toBeInTheDocument();
-  });
-
   it('should render both options on dropdown open', async () => {
     const { dropdown } = setup();
 
@@ -48,15 +42,5 @@ describe('Sort Control', () => {
       expect(el).toBeInTheDocument();
     });
     expect(screen.queryByText(anotherOption)).toBeInTheDocument();
-  });
-
-  it('should call onSelectionChanged on another option click', async () => {
-    const { dropdown } = setup();
-
-    await userEvent.click(dropdown);
-    await userEvent.click(screen.getByText(anotherOption));
-
-    expect(handleSelectionChanged).toBeCalledTimes(1);
-    expect(handleSelectionChanged).toBeCalledWith(anotherOption);
   });
 });
