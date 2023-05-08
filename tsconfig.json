@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "es2019",
+    "lib": ["dom", "dom.iterable", "es2019"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -9,13 +9,17 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"]
+    }
   },
-  "include": ["src", "jest.config.ts", "jest-setup.ts"]
+  "include": ["src", "app", "jest.config.ts", "jest-setup.ts", "tailwind.config.ts", "remix.config.js", "remix.env.d.ts", "**/*.ts", "**/*.tsx"],
 }
