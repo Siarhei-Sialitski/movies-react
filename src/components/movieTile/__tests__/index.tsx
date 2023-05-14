@@ -52,9 +52,9 @@ describe('Movie Tile', () => {
   it('should render genres', () => {
     setup();
 
-    movie.genres.map((genre) => {
-      expect(screen.getByText(genre, { exact: false })).toBeInTheDocument();
-    });
+    movie.genres.map((genre) =>
+      expect(screen.getByText(genre, { exact: false })).toBeInTheDocument()
+    );
   });
 
   it('should call onClick after user click', async () => {

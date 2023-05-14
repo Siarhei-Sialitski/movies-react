@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "sourceMap": true
   },
-  "include": ["src", "jest.config.ts", "jest-setup.ts"]
+  "include": ["src", "jest.config.ts", "jest-setup.ts", "postcss.config.ts"]
 }

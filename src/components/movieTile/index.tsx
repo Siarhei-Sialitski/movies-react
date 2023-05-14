@@ -15,12 +15,8 @@ const MovieTile: React.FC<IMovieTileProps> = ({
   };
 
   return (
-    <div
-      onClick={handleClick}
-      data-testid='movietilerootcontainer'
-      className='w-80'
-    >
-      <div className='relative top-14 left-64'>
+    <div onClick={handleClick} data-testid="movietilerootcontainer" className="w-80">
+      <div className="relative left-64 top-14">
         <TileMenu
           onEdit={() => {
             if (movie.id) onEdit?.(movie.id);
@@ -31,25 +27,25 @@ const MovieTile: React.FC<IMovieTileProps> = ({
         />
       </div>
       <img
-        className='w-80 h-[32rem] float-left z-0'
+        className="z-0 float-left h-[32rem] w-80"
         src={movie.poster_path}
         alt={movie.title}
       />
-      <div className='relative top-2.5 w-80'>
-        <div className='float-left'>
+      <div className="relative top-2.5 w-80">
+        <div className="float-left">
           <span
-            className='w-56 h-5 text-lg text-white opacity-70 mix-blend-normal'
-            data-testid='movie-tile-title'
+            className="h-5 w-56 text-lg text-white opacity-70 mix-blend-normal"
+            data-testid="movie-tile-title"
           >
             {movie.title}
           </span>
         </div>
-        <div className='box-border w-16 h-6 mix-blend-normal opacity-50 float-right text-center flex items-center justify-center rounded border border-solid border-gray-300'>
-          <span className='text-white opacity-70 mix-blend-normal text-center font-sm w-12 h-4 leading-4'>
+        <div className="float-right box-border flex h-6 w-16 items-center justify-center rounded border border-solid border-gray-300 text-center opacity-50 mix-blend-normal">
+          <span className="h-4 w-12 text-center leading-4 text-white opacity-70 mix-blend-normal">
             {movie.release_date.slice(0, 4)}
           </span>
         </div>
-        <div className='float-left'>
+        <div className="float-left">
           <MovieGenres genres={movie.genres} />
         </div>
       </div>

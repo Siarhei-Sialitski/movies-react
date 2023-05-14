@@ -10,10 +10,7 @@ const MovieGenres: React.FC<MovieGenresProps> = ({ genres }) => {
   ));
 
   return (
-    <div
-      className='text-white text-sm w-80 h-4 leading-4'
-      data-testid='moviegenres'
-    >
+    <div className="h-4 w-80 text-sm leading-4 text-white" data-testid="moviegenres">
       {genresList}
     </div>
   );

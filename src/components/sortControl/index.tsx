@@ -17,26 +17,23 @@ const SortControl: React.FC<ISortControlProps> = ({
       <option
         value={option}
         key={option}
-        className='text-neutral-300 bg-gray-400 placeholder:bg-gray-700'
+        className="bg-gray-400 text-neutral-300 placeholder:bg-gray-700"
       >
         {option}
       </option>
     );
   });
   return (
-    <div className='space-x-5'>
-      <label
-        htmlFor={dropdownId}
-        className='text-neutral-300 opacity-60 uppercase'
-      >
+    <div className="space-x-5">
+      <label htmlFor={dropdownId} className="uppercase text-neutral-300 opacity-60">
         sort by
       </label>
       <select
         id={dropdownId}
         value={currentSelection}
         onChange={handleChange}
-        className='w-40 uppercase bg-neutral-800 text-neutral-300'
-        data-testid='sort-dropdown'
+        className="w-40 bg-neutral-800 uppercase text-neutral-300"
+        data-testid="sort-dropdown"
       >
         {optionList}
       </select>

@@ -23,21 +23,21 @@ const Search: React.FC = () => {
   };
 
   return (
-    <div className='flex gap-10 w-[48rem]' data-testid='search'>
+    <div className="flex w-[48rem] gap-10" data-testid="search">
       <input
-        className='w-full h-14 bg-gray-700 opacity-80 rounded text-xl text-neutral-300 pl-5 placeholder:opacity-50'
+        className="h-14 w-full rounded bg-gray-700 pl-5 text-xl text-neutral-300 opacity-80 placeholder:opacity-50"
         value={searchValue}
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
         onKeyDown={handleKeyDown}
-        placeholder='What do you want to watch?'
-        data-testid='search-input'
+        placeholder="What do you want to watch? ha"
+        data-testid="search-input"
       />
       <button
-        className='rounded bg-rose-500 w-60 font-montserrat text-neutral-300 uppercase text-xl opacity-80'
+        className="w-60 rounded bg-rose-500 text-xl uppercase text-neutral-300 opacity-80"
         onClick={handleSearch}
-        data-testid='search-button'
+        data-testid="search-button"
       >
         search
       </button>
