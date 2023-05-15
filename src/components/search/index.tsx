@@ -31,7 +31,7 @@ const Search: React.FC = () => {
           setSearchValue(e.target.value);
         }}
         onKeyDown={handleKeyDown}
-        placeholder="What do you want to watch? ha"
+        placeholder="What do you want to watch?"
         data-testid="search-input"
       />
       <button

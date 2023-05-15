@@ -13,6 +13,8 @@ module.exports = function (env, args) {
     devtool: env.production ? 'source-map' : 'inline-source-map',
     entry: {
       app: './src/index.tsx',
+      hot: 'webpack/hot/dev-server.js',
+      client: 'webpack-dev-server/client/index.js?hot=true&live-reload=true',
     },
     module: {
       rules: [
@@ -50,7 +52,7 @@ module.exports = function (env, args) {
       static: {
         directory: path.join(__dirname, 'dist'),
       },
-      hot: true,
+      hot: false,
       open: true,
     },
     optimization: {
@@ -75,6 +77,7 @@ module.exports = function (env, args) {
       clean: true,
     },
     plugins: [
+      new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         template: path.join(__dirname, '/public/index.html'),
         favicon: './public/favicon.ico',
