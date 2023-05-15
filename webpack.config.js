@@ -84,6 +84,7 @@ module.exports = function (env, args) {
       }),
       new CompressionPlugin(),
       new webpack.ProgressPlugin(),
-    ].concat(env.production ? [new MiniCssExtractPlugin()] : []),
+      ...(env.production ? [new MiniCssExtractPlugin()] : []),
+    ],
   };
 };
