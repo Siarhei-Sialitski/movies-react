@@ -1,8 +1,8 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
-enableFetchMocks();
 
 import { getMovie, getMovies } from '../api';
 import fetchMock from 'jest-fetch-mock';
+enableFetchMocks();
 
 const movies = [
   {
@@ -10,8 +10,7 @@ const movies = [
     title: 'Fifty Shades Freed',
     vote_average: 6.1,
     release_date: '2018-02-07',
-    poster_path:
-      'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg',
+    poster_path: 'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg',
     overview:
       'Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.',
     genres: ['Drama', 'Romance'],
@@ -22,8 +21,7 @@ const movies = [
     title: 'Kill Bill',
     vote_average: 8.1,
     release_date: '2018-02-07',
-    poster_path:
-      'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg',
+    poster_path: 'https://image.tmdb.org/t/p/w500/3kcEGnYBHDeqmdYf8ZRbKdfmlUy.jpg',
     overview:
       'Believing they have left behind shadowy figures from their past, newlyweds Christian and Ana fully embrace an inextricable connection and shared life of luxury. But just as she steps into her role as Mrs. Grey and he relaxes into an unfamiliar stability, new threats could jeopardize their happy ending before it even begins.',
     genres: ['Criminal', 'Romance'],
@@ -34,8 +32,7 @@ const movies = [
 const setupGetMovies = (search: string, filter: string, sortBy: string) => {
   const controller = new AbortController();
   const signal = controller.signal;
-  const getMoviesFunc = async () =>
-    await getMovies(search, filter, sortBy, signal);
+  const getMoviesFunc = async () => await getMovies(search, filter, sortBy, signal);
   return {
     getMovies: getMoviesFunc,
   };

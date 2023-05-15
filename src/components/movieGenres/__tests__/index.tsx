@@ -16,8 +16,8 @@ describe('Movie Genres', () => {
   it('should render genres', () => {
     setup();
 
-    genres.map((genre) => {
-      expect(screen.getByText(genre, { exact: false })).toBeInTheDocument();
-    });
+    genres.map((genre) =>
+      expect(screen.getByText(genre, { exact: false })).toBeInTheDocument()
+    );
   });
 });

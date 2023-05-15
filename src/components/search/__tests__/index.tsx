@@ -1,10 +1,10 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
-enableFetchMocks();
 
 import { render, screen } from '@testing-library/react';
 import Search from '../index';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
+enableFetchMocks();
 
 const initialValue = 'test';
 

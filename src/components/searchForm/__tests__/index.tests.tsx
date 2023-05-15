@@ -1,10 +1,10 @@
 import { enableFetchMocks } from 'jest-fetch-mock';
-enableFetchMocks();
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import SearchForm from '..';
+enableFetchMocks();
 
 const dialogMock = 'Add Movie Mock';
 const setup = () => {

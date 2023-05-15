@@ -38,9 +38,7 @@ describe('Sort Control', () => {
 
     await userEvent.click(dropdown);
 
-    screen.queryAllByText(defaultSelection).map((el) => {
-      expect(el).toBeInTheDocument();
-    });
+    screen.queryAllByText(defaultSelection).map((el) => expect(el).toBeInTheDocument());
     expect(screen.queryByText(anotherOption)).toBeInTheDocument();
   });
 });

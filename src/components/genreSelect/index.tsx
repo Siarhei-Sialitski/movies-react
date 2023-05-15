@@ -28,7 +28,7 @@ const GenreSelect: React.FC<GenreSelectProps> = ({
     );
   });
 
-  return <div className='space-x-4 flex content-center'>{genreItems}</div>;
+  return <div className="flex content-center space-x-4">{genreItems}</div>;
 };
 
 export default GenreSelect;

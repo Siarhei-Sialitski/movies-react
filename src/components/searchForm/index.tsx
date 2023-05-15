@@ -5,14 +5,12 @@ const SearchForm: React.FC = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   return (
-    <div className='flex content-center'>
+    <div className="flex content-center">
       {' '}
       <button
-        className='w-60 absolute top-10 right-10 opacity-60 bg-gray-400 h-14 rounded uppercase'
-        onClick={() =>
-          navigate({ pathname: 'new', search: searchParams.toString() })
-        }
-        data-testid='add-movie-button'
+        className="absolute right-10 top-10 h-14 w-60 rounded bg-gray-400 uppercase opacity-60"
+        onClick={() => navigate({ pathname: 'new', search: searchParams.toString() })}
+        data-testid="add-movie-button"
       >
         + add movie
       </button>
