@@ -54,6 +54,7 @@ module.exports = function (env, args) {
       },
       hot: false,
       open: true,
+      client: false,
     },
     optimization: {
       runtimeChunk: 'single',
